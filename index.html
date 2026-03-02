@@ -160,6 +160,14 @@
             },
             {
               "@type": "Question",
+              "name": "Can I use this for sand, dirt, or mud?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "NO. This tool uses acoustic pressure to eject fluids and loose dust. If you dropped your phone in wet mud, concrete, or heavy sand, playing high-frequency sounds can force the solid particles deeper or tear the speaker membrane. Clean out solid debris manually before using this tool."
+              }
+            },
+            {
+              "@type": "Question",
               "name": "Can I use this on AirPods, Headphones, or Laptops?",
               "acceptedAnswer": {
                 "@type": "Answer",
@@ -188,14 +196,6 @@
               "acceptedAnswer": {
                 "@type": "Answer",
                 "text": "Not necessarily. Crackling usually means water is vibrating against the membrane. Keep running the sound until the crackling stops. If it persists after 24 hours of drying, you may have permanent hardware damage unrelated to water."
-              }
-            },
-            {
-              "@type": "Question",
-              "name": "Can I use this for sand, dirt, or mud?",
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": "NO. This tool uses acoustic pressure to eject fluids and loose dust. If you dropped your phone in wet mud, concrete, or heavy sand, playing high-frequency sounds can force the solid particles deeper or tear the speaker membrane. Clean out solid debris manually before using this tool."
               }
             }
           ]
@@ -452,6 +452,11 @@
             display: flex; justify-content: space-between; font-weight: 700;
         }
         .panel-title span:last-child { color: var(--accent); }
+
+        /* --- AI TERMINAL STYLES --- */
+        #ai-input:focus { border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
+        #ai-chat-log::-webkit-scrollbar { width: 4px; }
+        #ai-chat-log::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
 
         /* --- HOW IT WORKS / STEPS --- */
         .steps-container { display: flex; flex-direction: column; gap: 15px; margin-bottom: 15px; }
@@ -810,6 +815,21 @@
             <span class="tool-title">Dust Removal</span>
             <span class="tool-sub">Pulse Modulator</span>
         </a>
+    </div>
+
+    <div class="panel">
+        <div class="panel-title"><span style="color: var(--neon-green);">System AI</span> <span>Query Terminal</span></div>
+        <p style="font-size: 10px; color: #888; margin-bottom: 15px;">Ask the localized AI anything about this tool, troubleshooting, or Don Systems.</p>
+        
+        <div id="ai-chat-log" style="background: #000; border: 1px solid #333; border-radius: 6px; padding: 15px; height: 120px; overflow-y: auto; margin-bottom: 10px; font-family: monospace; font-size: 10px; line-height: 1.5; color: #ccc;">
+            <span style="color: var(--neon-green);">> SYSTEM AI ONLINE.</span><br>
+            > How can I assist you with your hardware today?
+        </div>
+
+        <div style="display: flex; gap: 8px;">
+            <input type="text" id="ai-input" placeholder="e.g., How does this work? Is it safe for iPhone?" style="flex: 1; background: #050505; border: 1px solid #333; color: #fff; padding: 10px; border-radius: 6px; font-family: 'Exo 2', sans-serif; font-size: 10px; outline: none;">
+            <button onclick="processAIQuery()" style="background: var(--accent); color: #fff; border: none; padding: 0 15px; border-radius: 6px; font-weight: 900; font-size: 10px; cursor: pointer; transition: 0.2s;">ASK</button>
+        </div>
     </div>
 
     <div class="panel">
@@ -1235,6 +1255,101 @@
         visualizerLoop(freq);
     }
 
+    // --- SITE AI ENGINE ---
+    function processAIQuery() {
+        const inputField = document.getElementById('ai-input');
+        const chatLog = document.getElementById('ai-chat-log');
+        let query = inputField.value.trim().toLowerCase();
+        
+        if (!query) return;
+
+        // Print User Query
+        chatLog.innerHTML += `<br><br><span style="color: #fff;">> USER: ${inputField.value}</span><br>`;
+        inputField.value = '';
+        
+        // AI Thinking Delay
+        chatLog.innerHTML += `<span id="ai-thinking" style="color: #888;">> AI IS PROCESSING...</span>`;
+        chatLog.scrollTop = chatLog.scrollHeight;
+
+        setTimeout(() => {
+            document.getElementById('ai-thinking').remove();
+            let response = "";
+
+            // KNOWLEDGE BASE / KEYWORD MATCHING
+            if (query.includes('how') || query.includes('work') || query.includes('science') || query.includes('physics')) {
+                response = "The tool uses the HTML5 Web Audio API to generate mathematically pure soundwaves. The 165Hz sine wave matches the resonant frequency of modern micro-speakers. It causes 'Excursion' (pushing the diaphragm out) and 'Cavitation' (breaking water's surface tension), physically forcing droplets out of the microscopic grill holes.";
+            } 
+            else if (query.includes('iphone') || query.includes('apple') || query.includes('no sound') || query.includes('silent') || query.includes('mute')) {
+                response = "CRITICAL: If you are on an iPhone and hear no sound, you MUST turn OFF the physical Silent/Ring switch on the side of your phone. Web browsers cannot bypass Apple's hardware switch. Also, hold your iPhone vertically so gravity helps drain the water.";
+            } 
+            else if (query.includes('safe') || query.includes('damage') || query.includes('warranty') || query.includes('break')) {
+                response = "Yes, it is completely safe and will not void your warranty. It uses standard audio frequencies within your OS limits. However, DO NOT use it if your phone is clogged with solid matter like mud, sand, or wet concrete, as vibration can tear the speaker membrane.";
+            } 
+            else if (query.includes('mud') || query.includes('sand') || query.includes('dirt') || query.includes('concrete')) {
+                response = "WARNING: Do NOT use this tool for heavy mud, sand, or wet concrete. Acoustic pressure against solid, rock-like matter will permanently tear your delicate speaker membrane. Manually clean out solid debris first.";
+            }
+            else if (query.includes('salt') || query.includes('ocean') || query.includes('sea') || query.includes('beach')) {
+                response = "Salt water causes immediate corrosion. Rinse your phone gently with fresh tap water FIRST to remove the salt, THEN use this tool to eject the fresh water. Do not charge the phone until it is 100% dry.";
+            }
+            else if (query.includes('who') || query.includes('don') || query.includes('creator') || query.includes('about') || query.includes('company')) {
+                response = "This utility is developed and maintained by Don Odibat under Don System's Holding. It was built as a free, privacy-first rebellion against App Store apps that charge predatory subscriptions for basic speaker cleaning.";
+            } 
+            else if (query.includes('contact') || query.includes('email') || query.includes('support') || query.includes('tupelo')) {
+                response = "You can reach Don Systems directly at don.odibat@gmail.com. Our headquarters is located in Tupelo, MS, United States.";
+            } 
+            else if (query.includes('cost') || query.includes('free') || query.includes('app') || query.includes('price') || query.includes('subscription')) {
+                response = "This tool is 100% free forever. It runs entirely in your web browser, meaning there is no app to download, no APKs, and no subscription fees to pay.";
+            } 
+            else if (query.includes('privacy') || query.includes('data') || query.includes('track') || query.includes('collect')) {
+                response = "Your privacy is absolute. This tool runs client-side on your device. We do NOT collect personal files, location, microphone data, or track your identity. We only use local browser storage for your cleaning streaks.";
+            }
+            else if (query.includes('dust') || query.includes('lint')) {
+                response = "For dust and pocket lint, use our 'Dust-Shake' modes. The 60Hz mode uses a low-frequency square wave that acts like a tiny hammer to physically break apart the dust crust, followed by the 1kHz mode to blow the particles out.";
+            }
+            else if (query.includes('android') || query.includes('samsung') || query.includes('galaxy') || query.includes('pixel') || query.includes('xiaomi')) {
+                response = "Absolutely. The web audio engine is fully compatible with Android devices including Samsung Galaxy, Google Pixel, Xiaomi, and Oppo. Use the 'Diagnostics' panel to isolate and test dual-fire stereo speakers.";
+            }
+            else if (query.includes('top speaker') || query.includes('earpiece') || query.includes('tinny') || query.includes('quiet')) {
+                response = "The top earpiece has a smaller mesh that traps water easily. Use our 'Mode 5 (Air 440Hz)' or the 'Treble 12kHz' diagnostic specifically for the top speaker, as higher frequencies penetrate smaller holes better than deep bass.";
+            }
+            else if (query.includes('airpods') || query.includes('headphones') || query.includes('earbuds') || query.includes('laptop')) {
+                response = "Yes! For AirPods/Earbuds: Hold them with the mesh facing down and run the 'Apple 165Hz' mode. For Laptops: Place the laptop open on its side (speaker facing down) and run 'Pro Mode'.";
+            }
+            else if (query.includes('how long') || query.includes('time') || query.includes('cycle') || query.includes('pro mode')) {
+                response = "We recommend running 'Pro Mode' (Auto Cycle) 2-3 times. If your speaker is still muffled, wait 10 minutes for natural evaporation, position your phone upright (gravity helps), and try again.";
+            }
+            else if (query.includes('crackling') || query.includes('popping') || query.includes('broken')) {
+                response = "Crackling usually means water is actively vibrating against the membrane. Keep running the sound until the crackling stops. If it persists after 24 hours of drying, you may have permanent hardware damage (like a blown coil) unrelated to water.";
+            }
+            else if (query.includes('technology') || query.includes('code') || query.includes('api') || query.includes('html5')) {
+                response = "This app utilizes the native HTML5 Web Audio API. It does not use compressed MP3s. Instead, it mathematically generates Sine, Square, and Sawtooth waveforms in real-time directly from your device's processor.";
+            }
+            else if (query.includes('other tools') || query.includes('tell my location') || query.includes('network')) {
+                response = "Don Systems also maintains 'Tell My Location' (tellmylocation.com) for instant, client-side GPS coordinate retrieval, and 'Check This Phone' (checkthisphone.com) for comprehensive device diagnostics.";
+            }
+            else if (query.includes('coffee') || query.includes('donate') || query.includes('support')) {
+                response = "Thank you! You can support the infrastructure and keep this tool ad-light and free by buying Don a coffee at: buymeacoffee.com/donshehab";
+            }
+            else {
+                response = "I am the local System AI. I can answer detailed questions about acoustic water ejection, 165Hz physics, iOS/Android troubleshooting, hardware safety, or Don Systems. Try asking 'How does this work?' or 'What if I dropped it in salt water?'";
+            }
+
+            // Print AI Response
+            chatLog.innerHTML += `<span style="color: var(--accent);">> AI: ${response}</span>`;
+            chatLog.scrollTop = chatLog.scrollHeight;
+        }, 600); // 600ms delay to feel like it is "thinking"
+    }
+
+    // Allow pressing "Enter" to submit
+    document.addEventListener('DOMContentLoaded', () => {
+        const aiInput = document.getElementById('ai-input');
+        if (aiInput) {
+            aiInput.addEventListener('keypress', function (e) {
+                if (e.key === 'Enter') processAIQuery();
+            });
+        }
+    });
+
     // --- TRANSLATION ENGINE ---
     const translations = {
         en: {
@@ -1400,8 +1515,6 @@
         setTxt('lbl-cleans', t.cleans);
         setTxt('lbl-trans', t.trans);
         setTxt('lbl-uplink', t.uplink);
-        
-        // Removed generic send to friend text swap to handle new social grid
         
         setTxt('lbl-qr', t.qr);
         setTxt('lbl-coffee', t.coffee);
