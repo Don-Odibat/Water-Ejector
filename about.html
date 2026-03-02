@@ -172,6 +172,35 @@
         .article-content p { font-size: 15px; color: #aaa; margin-bottom: 20px; text-align: justify; line-height: 1.8; }
         .article-content strong { color: #fff; font-weight: 700; }
 
+        /* --- COMMUNITY CONTRIBUTORS CSS --- */
+        .contributor-list { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+        .contributor-card { 
+            background: #050505; 
+            border-left: 2px solid var(--neon-green); 
+            padding: 12px 15px; 
+            border-radius: 4px; 
+            display: flex; flex-direction: column; gap: 6px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+            transition: transform 0.2s;
+        }
+        .contributor-card:hover { transform: translateX(5px); }
+        .contributor-card.accent { border-left-color: var(--accent); }
+        .contributor-header { display: flex; justify-content: space-between; align-items: center; }
+        .contributor-name { font-size: 11px; color: var(--neon-green); font-weight: 900; font-family: monospace; text-transform: lowercase;}
+        .contributor-card.accent .contributor-name { color: var(--accent); }
+        .contributor-platform { font-size: 8px; color: #888; background: #111; padding: 2px 6px; border-radius: 4px; text-transform: uppercase; border: 1px solid #333;}
+        .contributor-fix { font-size: 10px; color: #ccc; line-height: 1.5; text-align: left; }
+        
+        .community-intro { font-size: 13px; color: #888; text-align: center; margin-bottom: 15px; line-height: 1.6; }
+
+        .btn-share {
+            width: 100%; background: transparent; border: 1px solid var(--neon-green); color: var(--neon-green); padding: 15px; border-radius: 8px;
+            font-weight: 900; text-transform: uppercase; cursor: pointer;
+            margin-top: 20px; display: flex; align-items: center; justify-content: center; gap: 10px;
+            transition: 0.2s; letter-spacing: 1px; font-size: 11px;
+        }
+        .btn-share:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 20px rgba(57, 255, 20, 0.4); }
+
         /* --- TRUST BLOCK (PUBLISHER INFO) --- */
         .trust-block {
             background: linear-gradient(135deg, #050505, #111);
@@ -224,7 +253,7 @@
 
     <header>
         <div class="logo-box">
-            <svg class="logo-icon" viewBox="0 0 24 24"><path d="M12 22c4.97 0 9-4.03 9-9-4.5 0-9-5-9-13 0 8-4.5 13-9 13 0 4.97 4.03 9 9 9zM12 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
+            <svg class="logo-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 22c4.97 0 9-4.03 9-9-4.5 0-9-5-9-13 0 8-4.5 13-9 13 0 4.97 4.03 9 9 9zM12 14c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/></svg>
             <h1>ABOUT DON SYSTEMS</h1>
         </div>
         <div class="page-title">THE MISSION & THE ARCHITECT</div>
@@ -252,9 +281,64 @@
         </div>
     </div>
 
+    <div class="article-panel" style="padding: 25px;">
+        <div class="article-content" style="text-align: center;">
+            <h2 style="color: var(--neon-green); margin-bottom: 5px;">Community Patch Notes</h2>
+            <p class="community-intro">This tool is battle-tested by the community. Spotted a bug, have a feature idea, or want to roast the UX? Tell us on Reddit, and if we implement your fix, you'll be immortalized below.</p>
+            
+            <div class="contributor-list">
+                
+                <div class="contributor-card">
+                    <div class="contributor-header">
+                        <span class="contributor-name">> u/TreeWhispers213</span>
+                        <span class="contributor-platform">Reddit</span>
+                    </div>
+                    <div class="contributor-fix">Successfully ran the water ejector test and flagged a critical spelling error ("wate" missing the "r") in the soapy/chlorinated section of the chemical damage table. Typo patched!</div>
+                </div>
+
+                <div class="contributor-card accent">
+                    <div class="contributor-header">
+                        <span class="contributor-name">> u/Anonymous_User</span>
+                        <span class="contributor-platform">Reddit</span>
+                    </div>
+                    <div class="contributor-fix">Identified a rendering failure where the "transmission-uplink-sharing.jpg" graphic was broken due to a local file path error in the Transmission panel. Asset path fully restored.</div>
+                </div>
+
+                <div class="contributor-card">
+                    <div class="contributor-header">
+                        <span class="contributor-name">> u/BantrChat</span>
+                        <span class="contributor-platform">Reddit</span>
+                    </div>
+                    <div class="contributor-fix">Flagged a UX issue with the master STOP button getting lost while scrolling, and suggested adding a Mud/Sand liability warning. UI updated and warnings added.</div>
+                </div>
+
+                <div class="contributor-card accent">
+                    <div class="contributor-header">
+                        <span class="contributor-name">> u/gutsngodhand</span>
+                        <span class="contributor-platform">Reddit</span>
+                    </div>
+                    <div class="contributor-fix">Discovered that the Dust Shake BRKR 120Hz frequency sounded exactly like Benny Benassi's 'Satisfaction'. We'll take that as a feature!</div>
+                </div>
+
+                <div class="contributor-card">
+                    <div class="contributor-header">
+                        <span class="contributor-name">> u/Isolice</span>
+                        <span class="contributor-platform">Reddit</span>
+                    </div>
+                    <div class="contributor-fix">Reported no sound on iPhone 13 Pro Max using Firefox. This led to the discovery of the iOS "Silent Switch" block on the Web Audio API, resulting in our dynamic warning banner.</div>
+                </div>
+
+            </div>
+
+            <button class="btn-share" onclick="window.open('https://reddit.com')" aria-label="Report a Bug">
+                > REPORT A BUG / ROAST MY CODE
+            </button>
+        </div>
+    </div>
+
     <div class="trust-block">
         <h3>
-            <svg style="width:24px;height:24px;fill:currentColor;" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+            <svg aria-hidden="true" style="width:24px;height:24px;fill:currentColor;" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
             About The Publisher & Editorial Policy
         </h3>
         <p>Speaker Cleaner Pro is independently owned, operated, and maintained. We hold ourselves to the highest standards of technical accuracy. Our diagnostic guides are continually tested against the latest acoustic hardware architectures from Apple, Samsung, and Google. We do not accept sponsored placements from hardware repair shops, ensuring our troubleshooting advice remains 100% objective.</p>
