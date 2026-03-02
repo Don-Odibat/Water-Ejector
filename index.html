@@ -211,7 +211,7 @@
             --accent-glow: rgba(255, 0, 60, 0.5);
             --neon-green: #39ff14; 
             --text-main: #ffffff;
-            --text-muted: #999999; /* Improved Contrast for SEO */
+            --text-muted: #999999; 
             --border: #333333;
             /* Social Colors */
             --fb-color: #1877F2;
@@ -230,7 +230,7 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 10px 10px 120px 10px; /* Added massive bottom padding for floating button */
+            padding: 10px 10px 120px 10px; /* Padding for floating stop button */
             overflow-x: hidden;
         }
 
@@ -251,9 +251,7 @@
         .shell { width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 20px; z-index: 1; }
 
         /* --- LANGUAGE SELECTOR --- */
-        .lang-box {
-            position: absolute; top: 0; right: 0; z-index: 100;
-        }
+        .lang-box { position: absolute; top: 0; right: 0; z-index: 100; }
         select.lang-select {
             background: rgba(0,0,0,0.8); color: #fff; border: 1px solid #333;
             padding: 5px 10px; border-radius: 4px; font-size: 10px;
@@ -274,13 +272,9 @@
         .logo-box { display: flex; justify-content: center; align-items: center; gap: 10px; margin-bottom: 5px; }
         .logo-icon { width: 32px; height: 32px; fill: var(--accent); filter: drop-shadow(0 0 10px var(--accent)); }
         h1 { font-size: 28px; font-weight: 900; color: #fff; margin: 0; letter-spacing: 2px; }
+        .badge-pro { background: var(--accent); color: #fff; font-size: 12px; padding: 3px 8px; border-radius: 4px; margin-left: 5px; letter-spacing: 1px; vertical-align: middle; }
         
-        .badge-pro { 
-            background: var(--accent); color: #fff; font-size: 12px; padding: 3px 8px; 
-            border-radius: 4px; margin-left: 5px; letter-spacing: 1px; vertical-align: middle;
-        }
-        
-        /* --- TRUST BADGE STYLE --- */
+        /* --- TRUST BADGE --- */
         .trust-badge-container {
             display: inline-flex; align-items: center; gap: 8px;
             background: rgba(57, 255, 20, 0.05); border: 1px solid rgba(57, 255, 20, 0.3);
@@ -291,10 +285,7 @@
         .trust-text { color: #fff; font-size: 10px; font-weight: 700; letter-spacing: 1px; }
         .trust-sub { color: #aaa; font-size: 9px; font-weight: 400; margin-left: 5px; }
 
-        .tagline { 
-            font-size: 11px; color: var(--text-muted); font-weight: 600; letter-spacing: 3px;
-            margin-bottom: 5px; margin-top: 10px;
-        }
+        .tagline { font-size: 11px; color: var(--text-muted); font-weight: 600; letter-spacing: 3px; margin-bottom: 5px; margin-top: 10px; }
         .typing-status { font-family: monospace; font-size: 12px; color: var(--accent); min-height: 16px; text-shadow: 0 0 5px var(--accent-glow); }
 
         /* --- SMART DEVICE BAR --- */
@@ -307,144 +298,11 @@
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- GAUGE ENGINE --- */
-        .dashboard-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; margin: 25px 0 10px 0; }
-        .gauge-box { position: relative; width: 30%; text-align: center; }
-        .gauge-box.center-gauge { width: 40%; }
-        .gauge-ring {
-            width: 100%; padding-bottom: 100%;
-            border-radius: 50%; border: 2px solid #333; position: relative;
-            background: radial-gradient(circle, #151515 0%, #000 100%);
-            box-shadow: inset 0 0 20px #000;
-            overflow: hidden;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-        .gauge-ring.active {
-            border-color: var(--accent);
-            box-shadow: 0 0 20px var(--accent-glow), inset 0 0 20px #000;
-        }
-        .ticks-overlay {
-            position: absolute; width: 100%; height: 100%; border-radius: 50%;
-            background: repeating-conic-gradient(from 210deg, rgba(255, 255, 255, 0.3) 0deg 1px, transparent 1px 15deg);
-            mask-image: radial-gradient(transparent 60%, black 61%);
-            -webkit-mask-image: radial-gradient(transparent 60%, black 61%);
-            z-index: 1; opacity: 0.5;
-        }
-        .gauge-numbers span { position: absolute; color: #999; font-size: 8px; font-weight: bold; z-index: 2; }
-        .n-0 { bottom: 25%; left: 20%; }
-        .n-50 { top: 12%; left: 50%; transform: translateX(-50%); }
-        .n-100 { bottom: 25%; right: 20%; }
-        .needle {
-            position: absolute; 
-            bottom: 50%; left: 50%; width: 2px; height: 45%; margin-left: -1px;
-            background: var(--accent); 
-            transform-origin: bottom center; 
-            transform: rotate(-120deg); 
-            transition: transform 0.2s cubic-bezier(0.1, 0, 0.2, 1);
-            box-shadow: 0 0 8px var(--accent); z-index: 4; border-radius: 2px;
-        }
-        .gauge-center {
-            position: absolute; top: 40%; left: 40%; width: 20%; height: 20%;
-            background: #222; border-radius: 50%; z-index: 5; border: 1px solid #111;
-            box-shadow: 0 2px 5px #000;
-        }
-        .gauge-label {
-            font-size: 9px; color: #888; margin-top: 8px; text-transform: uppercase; font-weight: 700; letter-spacing: 1px;
-        }
-        .gauge-val {
-            position: absolute; bottom: 25%; width: 100%; text-align: center;
-            font-family: monospace; color: var(--accent); font-size: 10px; font-weight: bold; z-index: 1;
-            text-shadow: 0 0 5px var(--accent-glow);
-        }
-
-        /* --- FLOATING STOP BUTTON (UX UPGRADE) --- */
-        .btn-toggle-master {
-            width: 90px;
-            height: 90px;
-            background: #050505; 
-            border: 2px solid var(--accent); 
-            color: var(--accent);
-            border-radius: 50%; 
-            font-weight: 900; 
-            text-transform: uppercase;
-            cursor: pointer; 
-            transition: 0.3s; 
-            font-size: 14px;
-            display: flex; align-items: center; justify-content: center;
-            -webkit-tap-highlight-color: transparent;
-            /* Sticky/Floating Properties */
-            position: fixed;
-            bottom: 25px;
-            left: 50%;
-            transform: translateX(-50%);
-            z-index: 9999;
-            box-shadow: 0 0 15px var(--accent), 0 10px 30px rgba(0,0,0,0.9);
-            animation: pulse-glow 2s infinite;
-        }
-        .btn-toggle-master:active { transform: translateX(-50%) scale(0.95); }
-        
-        @keyframes pulse-glow {
-            0% { box-shadow: 0 0 10px var(--accent), 0 10px 30px rgba(0,0,0,0.9); }
-            50% { box-shadow: 0 0 25px var(--accent), inset 0 0 10px rgba(255,0,60,0.3), 0 10px 30px rgba(0,0,0,0.9); }
-            100% { box-shadow: 0 0 10px var(--accent), 0 10px 30px rgba(0,0,0,0.9); }
-        }
-
-        /* --- IOS WARNING BANNER --- */
-        #ios-warning {
-            display: none; /* Hidden by default */
-            background: rgba(255, 0, 60, 0.15);
-            border: 1px solid var(--accent);
-            color: #fff;
-            padding: 12px;
-            border-radius: 8px;
-            margin: 0 auto 20px auto;
-            width: 100%;
-            text-align: center;
-            font-size: 11px;
-            font-weight: 800;
-            letter-spacing: 1px;
-            line-height: 1.5;
-            box-shadow: 0 0 15px var(--accent-glow);
-            animation: warning-pulse 1.5s infinite;
-        }
-        #ios-warning span { color: var(--accent); font-weight: 900; }
-        @keyframes warning-pulse {
-            0% { box-shadow: 0 0 10px var(--accent-glow); }
-            50% { box-shadow: 0 0 20px var(--accent); }
-            100% { box-shadow: 0 0 10px var(--accent-glow); }
-        }
-
-        /* --- DISCLAIMER BOX --- */
-        .disclaimer-box {
-            background: rgba(255, 170, 0, 0.05);
-            border: 1px solid #ffaa00;
-            padding: 12px;
-            border-radius: 8px;
-            margin-bottom: 25px;
-            text-align: left;
-        }
-        .disclaimer-box h3 { color: #ffaa00; font-size: 11px; font-weight: 900; text-transform: uppercase; margin-bottom: 5px; }
-        .disclaimer-box p { font-size: 10px; color: #ccc; line-height: 1.5; }
-        .disclaimer-box strong { color: #fff; }
-
-        /* --- ADVANCED GRID --- */
-        .advanced-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 25px; }
-        @media (max-width: 400px) { .advanced-grid { grid-template-columns: 1fr; } }
-        .tool-btn { 
-            background: #050505; border: 1px solid #333; border-radius: 8px; padding: 12px; 
-            text-decoration: none; color: #fff; display: flex; flex-direction: column; 
-            align-items: center; justify-content: center; transition: 0.3s; gap: 3px;
-        }
-        .tool-btn:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 0, 60, 0.1); }
-        .tool-icon { font-size: 18px; margin-bottom: 2px; }
-        .tool-title { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
-        .tool-sub { font-size: 9px; color: #999; }
-
         /* --- CONTROL PANEL --- */
         .panel {
             background: rgba(10, 10, 10, 0.85); border: 1px solid var(--border);
             border-radius: 12px; padding: 20px; backdrop-filter: blur(10px);
-            margin-bottom: 20px;
+            margin-bottom: 5px; /* Tighter margins for the funnel */
         }
         .panel-title { 
             font-size: 11px; color: #fff; text-transform: uppercase; letter-spacing: 1px;
@@ -453,61 +311,31 @@
         }
         .panel-title span:last-child { color: var(--accent); }
 
-        /* --- AI TERMINAL STYLES --- */
-        #ai-input:focus { border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
-        #ai-chat-log::-webkit-scrollbar { width: 4px; }
-        #ai-chat-log::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+        /* --- IOS WARNING & DISCLAIMER --- */
+        #ios-warning {
+            display: none; background: rgba(255, 0, 60, 0.15); border: 1px solid var(--accent);
+            color: #fff; padding: 12px; border-radius: 8px; margin: 0 auto 15px auto; width: 100%;
+            text-align: center; font-size: 11px; font-weight: 800; letter-spacing: 1px; line-height: 1.5;
+            box-shadow: 0 0 15px var(--accent-glow); animation: warning-pulse 1.5s infinite;
+        }
+        #ios-warning span { color: var(--accent); font-weight: 900; }
+        @keyframes warning-pulse { 0% { box-shadow: 0 0 10px var(--accent-glow); } 50% { box-shadow: 0 0 20px var(--accent); } 100% { box-shadow: 0 0 10px var(--accent-glow); } }
 
-        /* --- HOW IT WORKS / STEPS --- */
-        .steps-container { display: flex; flex-direction: column; gap: 15px; margin-bottom: 15px; }
-        .step-box { background: #050505; border: 1px solid #222; padding: 15px; border-radius: 8px; text-align: left; display: flex; align-items: flex-start; gap: 15px;}
-        .step-icon { width: 24px; height: 24px; fill: var(--neon-green); flex-shrink: 0;}
-        .step-content { display: flex; flex-direction: column; }
-        .step-title { font-size: 11px; font-weight: 800; color: #fff; margin-bottom: 4px; text-transform: uppercase;}
-        .step-desc { font-size: 10px; color: #aaa; line-height: 1.5; }
+        .disclaimer-box {
+            background: rgba(255, 170, 0, 0.05); border: 1px solid #ffaa00; padding: 12px; border-radius: 8px;
+            margin-bottom: 15px; text-align: left;
+        }
+        .disclaimer-box h3 { color: #ffaa00; font-size: 11px; font-weight: 900; text-transform: uppercase; margin-bottom: 5px; }
+        .disclaimer-box p { font-size: 10px; color: #ccc; line-height: 1.5; margin:0;}
+        .disclaimer-box strong { color: #fff; }
 
-        /* --- IMAGE STYLES --- */
-        .article-img { width: 100%; border-radius: 8px; border: 1px solid #333; margin: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.5); display: block; }
-
-        /* --- SYSTEM LOG --- */
+        /* --- OPS GRID (THE EMERGENCY FIX) --- */
         #system-log {
             font-family: monospace; font-size: 9px; color: var(--neon-green);
             background: #000; border: 1px solid #222; padding: 8px; height: 45px;
-            overflow-y: hidden; margin-bottom: 15px; border-radius: 4px; opacity: 0.8;
-            line-height: 1.4;
+            overflow-y: hidden; margin-bottom: 15px; border-radius: 4px; opacity: 0.8; line-height: 1.4;
         }
-
-        .btn-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 25px; }
-        .mode-btn {
-            background: #050505; border: 1px solid #333; color: #888;
-            height: 50px; border-radius: 6px; font-size: 8px; font-weight: 700;
-            cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column;
-            align-items: center; justify-content: center; text-align: center; line-height: 1.2;
-        }
-        .mode-btn:hover { border-color: #aaa; color: #fff; }
-        .mode-btn.active { 
-            background: rgba(255,0,60,0.1); border-color: var(--accent); 
-            color: #fff; box-shadow: 0 0 15px var(--accent-glow);
-        }
-
-        /* --- DIAGNOSTICS & OPS --- */
-        .diag-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; margin-bottom: 25px; }
-        .btn-diag {
-            background: #111; border: 1px solid #333; color: #999; height: 40px;
-            border-radius: 4px; font-size: 9px; font-weight: 700; cursor: pointer;
-            transition: 0.2s; text-transform: uppercase;
-        }
-        .btn-diag:hover { border-color: var(--accent); color: #fff; }
-        .btn-diag.active { background: var(--accent); color: #fff; }
-
-        .btn-scanner {
-            background: #111; border: 1px solid #333; color: #999; height: 40px;
-            border-radius: 4px; font-size: 9px; font-weight: 700; cursor: pointer;
-            transition: 0.2s; text-transform: uppercase;
-        }
-        .btn-scanner:hover { border-color: var(--accent); color: #fff; }
-
-        .ops-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 25px; }
+        .ops-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
         .btn-ops {
             height: 50px; border: 1px solid var(--accent); background: rgba(255, 0, 60, 0.05);
             color: #fff; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
@@ -516,190 +344,198 @@
         }
         .btn-ops:hover { background: var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
         .btn-ops.active { background: var(--accent); color: #000; box-shadow: 0 0 20px var(--accent); }
-        .ops-label {
-            position: absolute; top: 2px; right: 4px; font-size: 7px; 
-            background: #fff; color: #000; padding: 1px 3px; border-radius: 2px; font-weight: 900;
-        }
+        .ops-label { position: absolute; top: 2px; right: 4px; font-size: 7px; background: #fff; color: #000; padding: 1px 3px; border-radius: 2px; font-weight: 900; }
         .btn-ops.active .ops-label { background: #000; color: #fff; }
 
-        /* --- PROGRESS & SCANNER --- */
-        .progress-container {
-            width: 100%; height: 6px; background: #222; border-radius: 3px; overflow: hidden; margin-bottom: 20px;
-            opacity: 0.5; transition: opacity 0.3s;
-        }
+        .progress-container { width: 100%; height: 6px; background: #222; border-radius: 3px; overflow: hidden; opacity: 0.5; transition: opacity 0.3s; }
         .progress-container.active { opacity: 1; }
         .progress-fill { height: 100%; width: 0%; background: var(--accent); box-shadow: 0 0 10px var(--accent); transition: width 0.1s linear; }
 
-        .scanner-box { 
-            background: #050505; border: 1px solid #222; padding: 10px; border-radius: 6px; 
-            margin-bottom: 25px; position: relative; overflow: hidden;
+        /* --- SCROLL MAGNET (CHEVRON) --- */
+        .scroll-magnet {
+            text-align: center; margin: 15px 0 25px 0; color: var(--accent); font-size: 9px; font-weight: 900; 
+            letter-spacing: 2px; text-transform: uppercase; cursor: pointer; animation: bounce 2s infinite;
         }
-        .scan-label { font-size: 9px; color: #aaa; text-transform: uppercase; margin-bottom: 5px; display:flex; justify-content:space-between;}
-        .scan-bar-bg { height: 6px; background: #222; border-radius: 3px; overflow: hidden; }
-        .scan-bar-fill { 
-            height: 100%; background: var(--accent); width: 0%; 
-            transition: width 0.5s ease-out; box-shadow: 0 0 10px var(--accent); 
-        }
-        .scanner-overlay {
-            position: absolute; top:0; left:0; width:100%; height:100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 0, 60, 0.1), transparent);
-            transform: translateX(-100%); transition: 0.5s; pointer-events: none;
-        }
-        .scanning .scanner-overlay { animation: scan-anim 1.5s infinite linear; }
-        @keyframes scan-anim { 0% { transform: translateX(-100%); } 100% { transform: translateX(100%); } }
-
-        /* --- VISUALIZER --- */
-        .viz-box {
-            display: flex; align-items: flex-end; justify-content: center; gap: 2px;
-            height: 30px; margin-bottom: 10px; opacity: 0.8;
-        }
-        .viz-bar {
-            width: 4px; background: var(--accent); border-radius: 2px 2px 0 0;
-            height: 2px; transition: height 0.1s;
+        .scroll-magnet svg { width: 24px; height: 24px; fill: var(--accent); display: block; margin: 5px auto 0 auto; }
+        @keyframes bounce { 
+            0%, 20%, 50%, 80%, 100% {transform: translateY(0);} 
+            40% {transform: translateY(-8px);} 
+            60% {transform: translateY(-4px);} 
         }
 
-        /* --- VOLUME & STATS --- */
-        .vol-box {
-            text-align: center; margin-top: 10px; margin-bottom: 15px;
-            background: #050505; padding: 15px; border-radius: 8px; border: 1px solid #222;
+        /* --- GAUGE ENGINE --- */
+        .dashboard-row { display: flex; justify-content: space-between; align-items: flex-end; gap: 10px; margin: 10px 0 20px 0; }
+        .gauge-box { position: relative; width: 30%; text-align: center; }
+        .gauge-box.center-gauge { width: 40%; }
+        .gauge-ring {
+            width: 100%; padding-bottom: 100%; border-radius: 50%; border: 2px solid #333; position: relative;
+            background: radial-gradient(circle, #151515 0%, #000 100%); box-shadow: inset 0 0 20px #000; overflow: hidden; transition: border-color 0.3s, box-shadow 0.3s;
         }
+        .gauge-ring.active { border-color: var(--accent); box-shadow: 0 0 20px var(--accent-glow), inset 0 0 20px #000; }
+        .ticks-overlay {
+            position: absolute; width: 100%; height: 100%; border-radius: 50%;
+            background: repeating-conic-gradient(from 210deg, rgba(255, 255, 255, 0.3) 0deg 1px, transparent 1px 15deg);
+            mask-image: radial-gradient(transparent 60%, black 61%); -webkit-mask-image: radial-gradient(transparent 60%, black 61%); z-index: 1; opacity: 0.5;
+        }
+        .gauge-numbers span { position: absolute; color: #999; font-size: 8px; font-weight: bold; z-index: 2; }
+        .n-0 { bottom: 25%; left: 20%; } .n-50 { top: 12%; left: 50%; transform: translateX(-50%); } .n-100 { bottom: 25%; right: 20%; }
+        .needle {
+            position: absolute; bottom: 50%; left: 50%; width: 2px; height: 45%; margin-left: -1px; background: var(--accent); 
+            transform-origin: bottom center; transform: rotate(-120deg); transition: transform 0.2s cubic-bezier(0.1, 0, 0.2, 1);
+            box-shadow: 0 0 8px var(--accent); z-index: 4; border-radius: 2px;
+        }
+        .gauge-center { position: absolute; top: 40%; left: 40%; width: 20%; height: 20%; background: #222; border-radius: 50%; z-index: 5; border: 1px solid #111; box-shadow: 0 2px 5px #000; }
+        .gauge-label { font-size: 9px; color: #888; margin-top: 8px; text-transform: uppercase; font-weight: 700; letter-spacing: 1px; }
+        .gauge-val { position: absolute; bottom: 25%; width: 100%; text-align: center; font-family: monospace; color: var(--accent); font-size: 10px; font-weight: bold; z-index: 1; text-shadow: 0 0 5px var(--accent-glow); }
+
+        /* --- FLOATING STOP BUTTON --- */
+        .btn-toggle-master {
+            width: 90px; height: 90px; background: #050505; border: 2px solid var(--accent); color: var(--accent);
+            border-radius: 50%; font-weight: 900; text-transform: uppercase; cursor: pointer; transition: 0.3s; font-size: 14px;
+            display: flex; align-items: center; justify-content: center; -webkit-tap-highlight-color: transparent;
+            position: fixed; bottom: 25px; left: 50%; transform: translateX(-50%); z-index: 9999;
+            box-shadow: 0 0 15px var(--accent), 0 10px 30px rgba(0,0,0,0.9); animation: pulse-glow 2s infinite;
+        }
+        .btn-toggle-master:active { transform: translateX(-50%) scale(0.95); }
+        @keyframes pulse-glow {
+            0% { box-shadow: 0 0 10px var(--accent), 0 10px 30px rgba(0,0,0,0.9); }
+            50% { box-shadow: 0 0 25px var(--accent), inset 0 0 10px rgba(255,0,60,0.3), 0 10px 30px rgba(0,0,0,0.9); }
+            100% { box-shadow: 0 0 10px var(--accent), 0 10px 30px rgba(0,0,0,0.9); }
+        }
+
+        /* --- MANUAL MODES GRID --- */
+        .btn-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 25px; }
+        .mode-btn {
+            background: #050505; border: 1px solid #333; color: #888; height: 50px; border-radius: 6px; font-size: 8px; font-weight: 700;
+            cursor: pointer; transition: all 0.2s; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; line-height: 1.2;
+        }
+        .mode-btn:hover { border-color: #aaa; color: #fff; }
+        .mode-btn.active { background: rgba(255,0,60,0.1); border-color: var(--accent); color: #fff; box-shadow: 0 0 15px var(--accent-glow); }
+
+        .viz-box { display: flex; align-items: flex-end; justify-content: center; gap: 2px; height: 30px; margin-bottom: 10px; opacity: 0.8; }
+        .viz-bar { width: 4px; background: var(--accent); border-radius: 2px 2px 0 0; height: 2px; transition: height 0.1s; }
+
+        .vol-box { text-align: center; margin-top: 10px; margin-bottom: 15px; background: #050505; padding: 15px; border-radius: 8px; border: 1px solid #222; }
         .vol-label { font-size: 9px; color: #aaa; text-transform: uppercase; margin-bottom: 10px; font-weight: 700; letter-spacing: 1px;}
-        input[type=range] {
-            width: 100%; -webkit-appearance: none; background: transparent;
-        }
-        input[type=range]::-webkit-slider-runnable-track {
-            width: 100%; height: 4px; background: #333; border-radius: 2px;
-        }
-        input[type=range]::-webkit-slider-thumb {
-            -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%;
-            background: var(--accent); margin-top: -6px; box-shadow: 0 0 10px var(--accent); cursor: grab;
-            border: 2px solid #fff;
-        }
+        input[type=range] { width: 100%; -webkit-appearance: none; background: transparent; }
+        input[type=range]::-webkit-slider-runnable-track { width: 100%; height: 4px; background: #333; border-radius: 2px; }
+        input[type=range]::-webkit-slider-thumb { -webkit-appearance: none; height: 16px; width: 16px; border-radius: 50%; background: var(--accent); margin-top: -6px; box-shadow: 0 0 10px var(--accent); cursor: grab; border: 2px solid #fff; }
 
-        .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 25px; }
+        .stats-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
         .stat-card { background: #080808; border: 1px solid #222; padding: 10px; border-radius: 6px; text-align: center; }
         .stat-val { font-size: 16px; font-weight: 900; color: #fff; margin-bottom: 2px; }
         .stat-label { font-size: 8px; color: #999; text-transform: uppercase; }
 
-        /* --- DIRECTORY BOX --- */
-        .directory-box { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 10px; }
-        .dir-tag { 
-            background: #111; border: 1px solid #333; color: #aaa; 
-            font-size: 9px; padding: 4px 8px; border-radius: 4px; 
-            text-decoration: none; transition: 0.2s; cursor: pointer;
-        }
-        .dir-tag:hover { border-color: var(--accent); color: #fff; background: rgba(255, 0, 60, 0.1); }
-        .dir-category { width: 100%; text-align: left; font-size: 10px; color: #fff; font-weight: 700; margin: 15px 0 5px 0; border-bottom: 1px solid #222; padding-bottom: 5px; }
+        /* --- DIAGNOSTICS & AI --- */
+        #ai-input:focus { border-color: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
+        #ai-chat-log::-webkit-scrollbar { width: 4px; }
+        #ai-chat-log::-webkit-scrollbar-thumb { background: #333; border-radius: 2px; }
+
+        .diag-grid { display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 10px; margin-bottom: 25px; }
+        .btn-diag { background: #111; border: 1px solid #333; color: #999; height: 40px; border-radius: 4px; font-size: 9px; font-weight: 700; cursor: pointer; transition: 0.2s; text-transform: uppercase; }
+        .btn-diag:hover { border-color: var(--accent); color: #fff; }
+        .btn-diag.active { background: var(--accent); color: #fff; }
+
+        .btn-scanner { background: #111; border: 1px solid #333; color: #999; height: 40px; border-radius: 4px; font-size: 9px; font-weight: 700; cursor: pointer; transition: 0.2s; text-transform: uppercase; }
+        .btn-scanner:hover { border-color: var(--accent); color: #fff; }
+
+        .scanner-box { background: #050505; border: 1px solid #222; padding: 10px; border-radius: 6px; margin-bottom: 10px; position: relative; overflow: hidden; }
+        .scan-label { font-size: 9px; color: #aaa; text-transform: uppercase; margin-bottom: 5px; display:flex; justify-content:space-between;}
+        .scan-bar-bg { height: 6px; background: #222; border-radius: 3px; overflow: hidden; }
+        .scan-bar-fill { height: 100%; background: var(--accent); width: 0%; transition: width 0.5s ease-out; box-shadow: 0 0 10px var(--accent); }
+        .scanner-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(90deg, transparent, rgba(255, 0, 60, 0.1), transparent); transform: translateX(-100%); transition: 0.5s; pointer-events: none; }
+        .scanning .scanner-overlay { animation: scan-anim 1.5s infinite linear; }
+
+        /* --- ADVANCED GRID --- */
+        .advanced-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px; margin-bottom: 5px; }
+        @media (max-width: 400px) { .advanced-grid { grid-template-columns: 1fr; } }
+        .tool-btn { background: #050505; border: 1px solid #333; border-radius: 8px; padding: 12px; text-decoration: none; color: #fff; display: flex; flex-direction: column; align-items: center; justify-content: center; transition: 0.3s; gap: 3px; }
+        .tool-btn:hover { border-color: var(--accent); transform: translateY(-3px); box-shadow: 0 5px 15px rgba(255, 0, 60, 0.1); }
+        .tool-icon { font-size: 18px; margin-bottom: 2px; }
+        .tool-title { font-size: 11px; font-weight: 900; text-transform: uppercase; letter-spacing: 1px; }
+        .tool-sub { font-size: 9px; color: #999; }
+
+        /* --- HOW IT WORKS / STEPS --- */
+        .steps-container { display: flex; flex-direction: column; gap: 15px; margin-bottom: 15px; }
+        .step-box { background: #050505; border: 1px solid #222; padding: 15px; border-radius: 8px; text-align: left; display: flex; align-items: flex-start; gap: 15px;}
+        .step-icon { width: 24px; height: 24px; fill: var(--neon-green); flex-shrink: 0;}
+        .step-content { display: flex; flex-direction: column; }
+        .step-title { font-size: 11px; font-weight: 800; color: #fff; margin-bottom: 4px; text-transform: uppercase;}
+        .step-desc { font-size: 10px; color: #aaa; line-height: 1.5; }
+        .article-img { width: 100%; border-radius: 8px; border: 1px solid #333; margin: 15px 0; box-shadow: 0 5px 15px rgba(0,0,0,0.5); display: block; }
+
+        /* --- FAQ STYLES --- */
+        .faq-item { margin-bottom: 10px; border-bottom: 1px solid #222; padding-bottom: 5px; text-align: left; }
+        .faq-item:last-child { border-bottom: none; }
+        details > summary { list-style: none; outline: none; cursor: pointer; font-size: 10px; color: #fff; font-weight: 700; padding: 8px 0; transition: color 0.2s; display: flex; align-items: center; gap: 8px; text-transform: uppercase; }
+        details > summary::-webkit-details-marker { display: none; }
+        details > summary:hover { color: var(--accent); }
+        details > summary::before { content: '>'; color: var(--accent); font-weight: 900; transition: transform 0.2s; }
+        details[open] > summary::before { transform: rotate(90deg); }
+        details > p { margin: 0; padding: 5px 0 10px 15px; font-size: 10px; color: #aaa; line-height: 1.6; border-left: 1px solid #333; }
 
         /* --- FOOTER & NEW SOCIAL SHARE BUTTONS --- */
-        .social-share-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin-bottom: 10px;
-        }
-        .social-btn {
-            display: flex; align-items: center; justify-content: center; gap: 8px;
-            padding: 12px; border-radius: 8px; font-size: 10px; font-weight: 900; text-transform: uppercase;
-            text-decoration: none; color: #fff; border: 1px solid #333; background: #111;
-            transition: 0.3s; cursor: pointer;
-        }
+        .social-share-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px; }
+        .social-btn { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 12px; border-radius: 8px; font-size: 10px; font-weight: 900; text-transform: uppercase; text-decoration: none; color: #fff; border: 1px solid #333; background: #111; transition: 0.3s; cursor: pointer; }
         .social-btn svg { width: 16px; height: 16px; fill: currentColor; }
-        
         .social-btn.fb:hover { background: var(--fb-color); border-color: var(--fb-color); box-shadow: 0 0 15px rgba(24,119,242,0.4); }
         .social-btn.rd:hover { background: var(--rd-color); border-color: var(--rd-color); box-shadow: 0 0 15px rgba(255,69,0,0.4); }
         .social-btn.tw:hover { background: var(--tw-color); border-color: var(--tw-color); box-shadow: 0 0 15px rgba(29,161,242,0.4); }
         .social-btn.wa:hover { background: var(--wa-color); border-color: var(--wa-color); box-shadow: 0 0 15px rgba(37,211,102,0.4); }
 
-        .btn-share-copy {
-            width: 100%; background: transparent; border: 1px solid var(--accent); color: var(--accent); 
-            padding: 15px; border-radius: 8px; font-weight: 900; text-transform: uppercase; cursor: pointer;
-            margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 10px;
-            transition: 0.2s; letter-spacing: 1px; font-size: 11px;
-        }
+        .btn-share-copy { width: 100%; background: transparent; border: 1px solid var(--accent); color: var(--accent); padding: 15px; border-radius: 8px; font-weight: 900; text-transform: uppercase; cursor: pointer; margin-bottom: 20px; display: flex; align-items: center; justify-content: center; gap: 10px; transition: 0.2s; letter-spacing: 1px; font-size: 11px; }
         .btn-share-copy:hover { background: var(--accent); color: #000; box-shadow: 0 0 20px var(--accent-glow); }
         
         .footer-actions { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 15px; }
-        .btn-mini {
-            padding: 12px; border-radius: 6px; font-size: 9px; font-weight: 800;
-            text-transform: uppercase; cursor: pointer; display: flex; 
-            align-items: center; justify-content: center; gap: 5px; text-decoration: none;
-            transition: 0.2s; background: transparent; text-align: center;
-        }
+        .btn-mini { padding: 12px; border-radius: 6px; font-size: 9px; font-weight: 800; text-transform: uppercase; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 5px; text-decoration: none; transition: 0.2s; background: transparent; text-align: center; }
         .btn-green { border: 1px solid var(--neon-green); color: var(--neon-green); box-shadow: 0 0 5px rgba(57, 255, 20, 0.2); }
         .btn-green:hover { background: var(--neon-green); color: #000; box-shadow: 0 0 15px var(--neon-green); }
 
-        /* --- PRIVACY STATEMENT STYLE --- */
-        .privacy-footer-box {
-            background: #080808; border: 1px solid #222; padding: 15px; border-radius: 8px;
-            margin-top: 25px; text-align: left;
-        }
+        .privacy-footer-box { background: #080808; border: 1px solid #222; padding: 15px; border-radius: 8px; margin-top: 25px; text-align: left; }
         .privacy-footer-box h4 { font-size: 10px; color: var(--accent); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px; }
         .privacy-footer-box p { font-size: 9px; color: #aaa; line-height: 1.4; margin-bottom: 5px; }
         .privacy-footer-box ul { list-style: none; padding: 0; margin-bottom: 10px; }
         .privacy-footer-box li { font-size: 9px; color: #999; display: flex; align-items: center; gap: 5px; margin-bottom: 3px; }
         .privacy-footer-box li span { color: var(--neon-green); font-weight: bold; }
 
-        .qr-wrapper {
-            background: #fff; padding: 10px; border-radius: 8px; width: 140px; margin: 0 auto 10px auto;
-            border: 2px solid var(--accent); box-shadow: 0 0 15px var(--accent-glow);
-        }
+        .qr-wrapper { background: #fff; padding: 10px; border-radius: 8px; width: 140px; margin: 0 auto 10px auto; border: 2px solid var(--accent); box-shadow: 0 0 15px var(--accent-glow); }
         .qr-wrapper img { width: 100%; display: block; }
-
-        /* --- FAQ STYLES --- */
-        .faq-item { margin-bottom: 10px; border-bottom: 1px solid #222; padding-bottom: 5px; text-align: left; }
-        .faq-item:last-child { border-bottom: none; }
-        details > summary {
-            list-style: none; outline: none; cursor: pointer; font-size: 10px; 
-            color: #fff; font-weight: 700; padding: 8px 0; transition: color 0.2s;
-            display: flex; align-items: center; gap: 8px; text-transform: uppercase;
-        }
-        details > summary::-webkit-details-marker { display: none; }
-        details > summary:hover { color: var(--accent); }
-        details > summary::before { content: '>'; color: var(--accent); font-weight: 900; transition: transform 0.2s; }
-        details[open] > summary::before { transform: rotate(90deg); }
-        details > p {
-            margin: 0; padding: 5px 0 10px 15px; font-size: 10px; color: #aaa; line-height: 1.6;
-            border-left: 1px solid #333;
-        }
-
-        footer { margin-top: 40px; text-align: center; font-size: 10px; color: #aaa; padding-bottom: 20px;}
-        footer a { color: #999; text-decoration: none; margin: 0 10px; transition: color 0.2s; }
-        footer a:hover { color: var(--accent); }
-        .don-sig { display: block; margin-top: 15px; font-weight: 900; color: #555; text-transform: uppercase; letter-spacing: 2px; font-size: 9px; }
-
-        #copy-toast {
-            position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--accent); color: white; padding: 10px 20px;
-            border-radius: 20px; font-size: 12px; font-weight: bold; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 2000;
-        }
+        #copy-toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%); background: var(--accent); color: white; padding: 10px 20px; border-radius: 20px; font-size: 12px; font-weight: bold; opacity: 0; pointer-events: none; transition: 0.3s; z-index: 2000; }
         #copy-toast.show { opacity: 1; top: 40px; }
 
         /* --- AUTHORITY HUB STYLES --- */
-        .authority-hub { width: 100%; max-width: 500px; margin: 0 auto; display: flex; flex-direction: column; gap: 25px; padding-bottom: 50px; }
+        .authority-hub { width: 100%; max-width: 500px; margin: 20px auto 0 auto; display: flex; flex-direction: column; gap: 20px; padding-bottom: 20px; }
         .hub-panel { background: rgba(10, 10, 10, 0.9); border: 1px solid #222; border-radius: 12px; padding: 25px; position: relative; overflow: hidden; }
         .hub-panel::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: var(--accent); }
-        
         .hub-header { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
         .hub-icon { width: 40px; height: 40px; background: var(--accent-glow); border-radius: 8px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--accent); }
         .hub-icon svg { width: 24px; height: 24px; fill: var(--accent); }
-        
         .hub-title h2 { font-size: 16px; font-weight: 900; color: #fff; text-transform: uppercase; letter-spacing: 1px; margin:0;}
         .hub-title span { font-size: 10px; color: var(--accent); font-weight: 700; text-transform: uppercase; }
-
         .hub-content h3 { font-size: 14px; color: #eee; margin: 20px 0 10px 0; display: flex; align-items: center; gap: 8px; }
         .hub-content h3::after { content: ''; flex: 1; height: 1px; background: #333; }
         .hub-content p { font-size: 12px; color: #aaa; line-height: 1.8; margin-bottom: 15px; text-align: justify; }
         .hub-content strong { color: #fff; font-weight: 700; }
-        
         .tech-spec-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 20px 0; }
         .spec-item { background: #000; border: 1px solid #222; padding: 12px; border-radius: 6px; }
         .spec-item label { display: block; font-size: 9px; color: var(--accent); font-weight: 900; margin-bottom: 4px; }
-        .spec-item .spec-val { display: block; font-size: 11px; color: #fff; font-family: monospace; } /* SEO Fix */
+        .spec-item .spec-val { display: block; font-size: 11px; color: #fff; font-family: monospace; } 
 
         .visual-divider { height: 100px; width: 100%; background: linear-gradient(transparent, rgba(255,0,60,0.05), transparent); display: flex; align-items: center; justify-content: center; margin: 10px 0; }
         .wave-anim { width: 80%; height: 2px; background: #333; position: relative; overflow: hidden; }
         .wave-anim::after { content: ''; position: absolute; left: -100%; width: 100%; height: 100%; background: var(--accent); animation: wave-move 2s infinite linear; }
         @keyframes wave-move { 0% { left: -100%; } 100% { left: 100%; } }
+
+        /* --- DIRECTORY BOX --- */
+        .directory-box { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-top: 10px; }
+        .dir-tag { background: #111; border: 1px solid #333; color: #aaa; font-size: 9px; padding: 4px 8px; border-radius: 4px; text-decoration: none; transition: 0.2s; cursor: pointer; }
+        .dir-tag:hover { border-color: var(--accent); color: #fff; background: rgba(255, 0, 60, 0.1); }
+        .dir-category { width: 100%; text-align: left; font-size: 10px; color: #fff; font-weight: 700; margin: 15px 0 5px 0; border-bottom: 1px solid #222; padding-bottom: 5px; }
+
+        footer { margin-top: 20px; text-align: center; font-size: 10px; color: #aaa; padding-bottom: 20px;}
+        footer a { color: #999; text-decoration: none; margin: 0 10px; transition: color 0.2s; }
+        footer a:hover { color: var(--accent); }
+        .don-sig { display: block; margin-top: 15px; font-weight: 900; color: #555; text-transform: uppercase; letter-spacing: 2px; font-size: 9px; }
     </style>
 </head>
 <body>
@@ -746,105 +582,22 @@
         </div>
     </header>
 
-    <div class="dashboard-row">
-        <div class="gauge-box">
-            <div class="gauge-ring" id="ring-load">
-                <div class="ticks-overlay"></div>
-                <div class="gauge-numbers"><span class="n-0">0</span><span class="n-50">50</span><span class="n-100">100</span></div>
-                <div class="gauge-center"></div>
-                <div class="needle" id="needle-load"></div>
-                <div class="gauge-val" id="val-load">0%</div>
-            </div>
-            <div class="gauge-label" id="lbl-gauge-cpu">CPU LOAD</div>
-        </div>
+    <div class="panel" style="border-color: var(--accent); box-shadow: 0 0 20px rgba(255,0,60,0.1);">
         
-        <div class="gauge-box center-gauge" style="width: 40%;">
-            <div class="gauge-ring active" id="ring-hz">
-                <div class="ticks-overlay"></div>
-                <div class="gauge-numbers" style="color: #888;"><span class="n-0">0</span><span class="n-50">10k</span><span class="n-100">20k</span></div>
-                <div class="gauge-center"></div>
-                <div class="needle" id="needle-hz" style="height: 48%; background: #fff; box-shadow: 0 0 10px #fff;"></div>
-                <div class="gauge-val" id="val-hz" style="color: #fff; text-shadow:none;">0 Hz</div>
-            </div>
-            <div class="gauge-label" style="color: var(--accent);" id="lbl-gauge-freq">FREQUENCY</div>
+        <div id="ios-warning">
+            ⚠️ <span>IPHONE DETECTED:</span> You must turn OFF your physical Silent/Ring switch on the side of your phone for the cleaning sound to play.
         </div>
 
-        <div class="gauge-box">
-            <div class="gauge-ring" id="ring-db">
-                <div class="ticks-overlay"></div>
-                <div class="gauge-numbers"><span class="n-0">0</span><span class="n-50">5</span><span class="n-100">10</span></div>
-                <div class="gauge-center"></div>
-                <div class="needle" id="needle-db"></div>
-                <div class="gauge-val" id="val-db">0</div>
-            </div>
-            <div class="gauge-label" id="lbl-gauge-gain">GAIN</div>
+        <div class="disclaimer-box">
+            <h3>⚠️ Critical Hardware Warning</h3>
+            <p>Do <strong>NOT</strong> use this tool if your speaker is clogged with mud, wet concrete, or heavy sand. Acoustic vibration against solid, rock-like matter can physically tear the delicate speaker membrane.</p>
         </div>
-    </div>
 
-    <button id="master-toggle" class="btn-toggle-master" onclick="stop()" aria-label="Stop Cleaning">STOP</button>
-    
-    <div style="text-align: center; margin-bottom: 20px; font-size: 11px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1px;">Turn your phone volume to max.</div>
-
-    <div id="ios-warning">
-        ⚠️ <span>IPHONE DETECTED:</span> You must turn OFF your physical Silent/Ring switch on the side of your phone for the cleaning sound to play.
-    </div>
-
-    <div class="disclaimer-box">
-        <h3>⚠️ Critical Hardware Warning</h3>
-        <p>Do <strong>NOT</strong> use this tool if your speaker is clogged with mud, wet concrete, or heavy sand. Acoustic vibration against solid, rock-like matter can physically tear the delicate speaker membrane. Manually clear solid debris before vibrating.</p>
-    </div>
-
-    <div class="advanced-grid">
-        <a href="water-eject.html" class="tool-btn">
-            <span class="tool-icon">🌊</span>
-            <span class="tool-title">Water Eject</span>
-            <span class="tool-sub">Advanced 3-Stage</span>
-        </a>
-        <a href="iphone-water-eject.html" class="tool-btn">
-            <span class="tool-icon">🍎</span>
-            <span class="tool-title">Apple Ejector</span>
-            <span class="tool-sub">Stereo Array</span>
-        </a>
-        <a href="android-cleaner.html" class="tool-btn">
-            <span class="tool-icon">🤖</span>
-            <span class="tool-title">Android Tool</span>
-            <span class="tool-sub">Hardware Tuning</span>
-        </a>
-        <a href="dust-removal.html" class="tool-btn">
-            <span class="tool-icon">🔨</span>
-            <span class="tool-title">Dust Removal</span>
-            <span class="tool-sub">Pulse Modulator</span>
-        </a>
-    </div>
-
-    <div class="panel">
-        <div class="panel-title"><span style="color: var(--neon-green);">System AI</span> <span>Query Terminal</span></div>
-        <p style="font-size: 10px; color: #888; margin-bottom: 15px;">Ask the localized AI anything about this tool, troubleshooting, or Don Systems.</p>
+        <div style="text-align: center; margin-bottom: 20px; font-size: 11px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1px;">Turn your phone volume to max.</div>
         
-        <div id="ai-chat-log" style="background: #000; border: 1px solid #333; border-radius: 6px; padding: 15px; height: 120px; overflow-y: auto; margin-bottom: 10px; font-family: monospace; font-size: 10px; line-height: 1.5; color: #ccc;">
-            <span style="color: var(--neon-green);">> SYSTEM AI ONLINE.</span><br>
-            > How can I assist you with your hardware today?
-        </div>
-
-        <div style="display: flex; gap: 8px;">
-            <input type="text" id="ai-input" placeholder="e.g., How does this work? Is it safe for iPhone?" style="flex: 1; background: #050505; border: 1px solid #333; color: #fff; padding: 10px; border-radius: 6px; font-family: 'Exo 2', sans-serif; font-size: 10px; outline: none;">
-            <button onclick="processAIQuery()" style="background: var(--accent); color: #fff; border: none; padding: 0 15px; border-radius: 6px; font-weight: 900; font-size: 10px; cursor: pointer; transition: 0.2s;">ASK</button>
-        </div>
-    </div>
-
-    <div class="panel">
-        <div class="panel-title"><span id="lbl-panel-test">Speaker Test</span> <span id="lbl-panel-iso">Isolation</span></div>
-        <div class="diag-grid">
-            <button class="btn-diag" id="btn-left" onclick="runDiagnostic('left')" aria-label="Test Left Speaker">LEFT</button>
-            <button class="btn-diag" id="btn-right" onclick="runDiagnostic('right')" aria-label="Test Right Speaker">RIGHT</button>
-            <button class="btn-diag" id="btn-bass" onclick="runDiagnostic('bass')" aria-label="Test Bass">BASS</button>
-            <button class="btn-diag" id="btn-treble" onclick="runDiagnostic('treble')" aria-label="Test Treble">TREBLE</button>
-        </div>
-
-        <div class="panel-title"><span id="lbl-panel-ops">Mission Log</span> <span id="lbl-panel-deep">Telemetry</span></div>
-        
+        <div class="panel-title"><span id="lbl-panel-ops">Emergency Auto-Fix</span> <span id="lbl-panel-deep">1-Click</span></div>
         <div id="system-log">> WAITING FOR COMMAND...</div>
-
+        
         <div class="ops-grid">
             <button class="btn-ops" id="btn-deep" onclick="runDeepClean()" aria-label="Run Pro Mode Cleaning">
                 <span class="ops-label" id="lbl-pro">PRO MODE</span>
@@ -859,14 +612,26 @@
         <div class="progress-container" id="prog-cont">
             <div class="progress-fill" id="prog-fill"></div>
         </div>
+    </div>
 
-        <div class="panel-title"><span id="lbl-panel-dust">Dust Integrity</span> <span id="lbl-panel-meter">Meter</span></div>
-        <div class="scanner-box" id="dust-box">
-            <div class="scanner-overlay"></div>
-            <div class="scan-label"><span id="lbl-contam">Contamination Level</span> <span id="dust-val">0%</span></div>
-            <div class="scan-bar-bg"><div class="scan-bar-fill" id="dust-bar" style="background: #ffaa00; box-shadow: 0 0 10px #ffaa00;"></div></div>
-            <button class="btn-scanner" id="btn-check" style="width:100%; margin-top:10px; border-color:#ffaa00; color:#ffaa00;" onclick="runScanner('dust')" aria-label="Check Dust Level">CHECK LEVEL</button>
+    <div class="dashboard-row">
+        <div class="gauge-box">
+            <div class="gauge-ring" id="ring-load"><div class="ticks-overlay"></div><div class="gauge-numbers"><span class="n-0">0</span><span class="n-50">50</span><span class="n-100">100</span></div><div class="gauge-center"></div><div class="needle" id="needle-load"></div><div class="gauge-val" id="val-load">0%</div></div>
+            <div class="gauge-label" id="lbl-gauge-cpu">CPU LOAD</div>
         </div>
+        <div class="gauge-box center-gauge" style="width: 40%;">
+            <div class="gauge-ring active" id="ring-hz"><div class="ticks-overlay"></div><div class="gauge-numbers" style="color: #888;"><span class="n-0">0</span><span class="n-50">10k</span><span class="n-100">20k</span></div><div class="gauge-center"></div><div class="needle" id="needle-hz" style="height: 48%; background: #fff; box-shadow: 0 0 10px #fff;"></div><div class="gauge-val" id="val-hz" style="color: #fff; text-shadow:none;">0 Hz</div></div>
+            <div class="gauge-label" style="color: var(--accent);" id="lbl-gauge-freq">FREQUENCY</div>
+        </div>
+        <div class="gauge-box">
+            <div class="gauge-ring" id="ring-db"><div class="ticks-overlay"></div><div class="gauge-numbers"><span class="n-0">0</span><span class="n-50">5</span><span class="n-100">10</span></div><div class="gauge-center"></div><div class="needle" id="needle-db"></div><div class="gauge-val" id="val-db">0</div></div>
+            <div class="gauge-label" id="lbl-gauge-gain">GAIN</div>
+        </div>
+    </div>
+
+    <div class="scroll-magnet" onclick="window.scrollBy({top: 400, behavior: 'smooth'})">
+        <span>[ ADVANCED CALIBRATION BELOW ]</span>
+        <svg viewBox="0 0 24 24"><path d="M16.59 8.59L12 13.17 7.41 8.59 6 10l6 6 6-6z"/></svg>
     </div>
 
     <div class="panel">
@@ -897,97 +662,75 @@
         </div>
 
         <div class="stats-row">
-            <div class="stat-card">
-                <div class="stat-val" id="streak-val">1</div>
-                <div class="stat-label" id="lbl-streak">Day Streak</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-val" id="history-val">0</div>
-                <div class="stat-label" id="lbl-cleans">Total Cleans</div>
-            </div>
+            <div class="stat-card"><div class="stat-val" id="streak-val">1</div><div class="stat-label" id="lbl-streak">Day Streak</div></div>
+            <div class="stat-card"><div class="stat-val" id="history-val">0</div><div class="stat-label" id="lbl-cleans">Total Cleans</div></div>
         </div>
+    </div>
+
+    <div class="panel">
+        <div class="panel-title"><span style="color: var(--neon-green);">System AI</span> <span>Query Terminal</span></div>
+        <p style="font-size: 10px; color: #888; margin-bottom: 15px;">Ask the localized AI anything about this tool, troubleshooting, or Don Systems.</p>
+        
+        <div id="ai-chat-log">
+            <span style="color: var(--neon-green);">> SYSTEM AI ONLINE.</span><br>
+            > How can I assist you with your hardware today?
+        </div>
+
+        <div style="display: flex; gap: 8px;">
+            <input type="text" id="ai-input" placeholder="e.g., How does this work? Is it safe for iPhone?" style="flex: 1; background: #050505; border: 1px solid #333; color: #fff; padding: 10px; border-radius: 6px; font-family: 'Exo 2', sans-serif; font-size: 10px; outline: none;">
+            <button onclick="processAIQuery()" style="background: var(--accent); color: #fff; border: none; padding: 0 15px; border-radius: 6px; font-weight: 900; font-size: 10px; cursor: pointer; transition: 0.2s;">ASK</button>
+        </div>
+
+        <div class="panel-title" style="margin-top: 25px;"><span id="lbl-panel-test">Speaker Test</span> <span id="lbl-panel-iso">Isolation</span></div>
+        <div class="diag-grid">
+            <button class="btn-diag" id="btn-left" onclick="runDiagnostic('left')" aria-label="Test Left Speaker">LEFT</button>
+            <button class="btn-diag" id="btn-right" onclick="runDiagnostic('right')" aria-label="Test Right Speaker">RIGHT</button>
+            <button class="btn-diag" id="btn-bass" onclick="runDiagnostic('bass')" aria-label="Test Bass">BASS</button>
+            <button class="btn-diag" id="btn-treble" onclick="runDiagnostic('treble')" aria-label="Test Treble">TREBLE</button>
+        </div>
+
+        <div class="panel-title"><span id="lbl-panel-dust">Dust Integrity</span> <span id="lbl-panel-meter">Meter</span></div>
+        <div class="scanner-box" id="dust-box">
+            <div class="scanner-overlay"></div>
+            <div class="scan-label"><span id="lbl-contam">Contamination Level</span> <span id="dust-val">0%</span></div>
+            <div class="scan-bar-bg"><div class="scan-bar-fill" id="dust-bar" style="background: #ffaa00; box-shadow: 0 0 10px #ffaa00;"></div></div>
+            <button class="btn-scanner" id="btn-check" style="width:100%; margin-top:10px; border-color:#ffaa00; color:#ffaa00;" onclick="runScanner('dust')" aria-label="Check Dust Level">CHECK LEVEL</button>
+        </div>
+    </div>
+
+    <div class="advanced-grid">
+        <a href="water-eject.html" class="tool-btn"><span class="tool-icon">🌊</span><span class="tool-title">Water Eject</span><span class="tool-sub">Advanced 3-Stage</span></a>
+        <a href="iphone-water-eject.html" class="tool-btn"><span class="tool-icon">🍎</span><span class="tool-title">Apple Ejector</span><span class="tool-sub">Stereo Array</span></a>
+        <a href="android-cleaner.html" class="tool-btn"><span class="tool-icon">🤖</span><span class="tool-title">Android Tool</span><span class="tool-sub">Hardware Tuning</span></a>
+        <a href="dust-removal.html" class="tool-btn"><span class="tool-icon">🔨</span><span class="tool-title">Dust Removal</span><span class="tool-sub">Pulse Modulator</span></a>
     </div>
 
     <div class="panel">
         <div class="panel-title"><span>How It</span> <span>Works</span></div>
         <div class="steps-container">
-            <div class="step-box">
-                <svg class="step-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg>
-                <div class="step-content">
-                    <div class="step-title">1. Excursion</div>
-                    <div class="step-desc">A low-frequency sine wave causes the internal speaker diaphragm to physically push outward, generating air pressure.</div>
-                </div>
-            </div>
-            <div class="step-box">
-                <svg class="step-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M21 3H3v18h18V3zM8 17H6v-6h2v6zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg>
-                <div class="step-content">
-                    <div class="step-title">2. Cavitation</div>
-                    <div class="step-desc">The air pressure combats surface tension, forcing trapped water droplets out of the microscopic holes in the hardware grill.</div>
-                </div>
-            </div>
-            <div class="step-box">
-                <svg class="step-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2.02c-5.51 0-9.98 4.47-9.98 9.98s4.47 9.98 9.98 9.98 9.98-4.47 9.98-9.98S17.51 2.02 12 2.02zM11.48 20v-6.26H8L13 4v6.26h3.35L11.48 20z"/></svg>
-                <div class="step-content">
-                    <div class="step-title">3. Clearance</div>
-                    <div class="step-desc">Switching to higher frequencies helps clear residual moisture by vibrating the mesh rapidly, preventing rust or corrosion.</div>
-                </div>
-            </div>
+            <div class="step-box"><svg class="step-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/></svg><div class="step-content"><div class="step-title">1. Excursion</div><div class="step-desc">A low-frequency sine wave causes the internal speaker diaphragm to physically push outward, generating air pressure.</div></div></div>
+            <div class="step-box"><svg class="step-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M21 3H3v18h18V3zM8 17H6v-6h2v6zm4 0h-2V7h2v10zm4 0h-2v-4h2v4z"/></svg><div class="step-content"><div class="step-title">2. Cavitation</div><div class="step-desc">The air pressure combats surface tension, forcing trapped water droplets out of the microscopic holes in the hardware grill.</div></div></div>
+            <div class="step-box"><svg class="step-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2.02c-5.51 0-9.98 4.47-9.98 9.98s4.47 9.98 9.98 9.98 9.98-4.47 9.98-9.98S17.51 2.02 12 2.02zM11.48 20v-6.26H8L13 4v6.26h3.35L11.48 20z"/></svg><div class="step-content"><div class="step-title">3. Clearance</div><div class="step-desc">Switching to higher frequencies helps clear residual moisture by vibrating the mesh rapidly, preventing rust or corrosion.</div></div></div>
         </div>
-        
         <img src="how-speaker-cleaner-works.jpg" alt="Diagram showing acoustic sound waves ejecting water droplets from a smartphone speaker grill" class="article-img">
-        
         <p style="font-size: 11px; color: #aaa; margin-top: 15px; line-height: 1.6; text-align: justify;">Phone Speaker Cleaner utilizes your browser's native HTML5 Web Audio API. This means the soundwaves are generated locally on your device's processor in real-time. We do not use highly-compressed, pre-recorded MP3 files that can cause digital clipping and harm your voice coil.</p>
-        
         <p style="font-size: 11px; color: #aaa; margin-top: 15px; line-height: 1.6; text-align: justify;">By relying on pure mathematical waveforms, the tool stays within the safe amplitude limits defined by your operating system's audio drivers.</p>
     </div>
 
     <div class="panel">
         <div class="panel-title"><span>System</span> <span>FAQ</span></div>
         <div class="faq-container">
-            <details class="faq-item">
-                <summary>Is this sound safe for my speakers?</summary>
-                <p>Yes. We use specific sine waves (165Hz) designed to vibrate the speaker diaphragm without exceeding safe amplitude limits. It essentially 'shakes' the water off without damaging hardware.</p>
-            </details>
-            <details class="faq-item">
-                <summary>How long should I run the cleaning cycle?</summary>
-                <p>We recommend running "Pro Mode" (Auto Cycle) 2-3 times. If water is still trapped, position your phone upright and run it for 5 minutes.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Does this work for iPhone and Android?</summary>
-                <p>Absolutely. It works on any device with a speaker, including iPhone, Samsung Galaxy, Pixel, Xiaomi, and even smartwatches.</p>
-            </details>
-            <details class="faq-item">
-                <summary>What should I do if the sound is still muffled?</summary>
-                <p>Wait 10 minutes for evaporation, then try again. Gravity helps—keep the speaker facing down while the sound plays.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Why can't I hear anything?</summary>
-                <p>Your volume might be too low, or water has temporarily shorted the connection. Turn volume to max and run the 165Hz mode.</p>
-            </details>
-            <details class="faq-item">
-                <summary>My phone fell in Salt Water (Ocean). What now?</summary>
-                <p style="color: #ffaa00;"><strong>CRITICAL:</strong> Salt creates corrosion instantly. Rinse your phone gently with fresh tap water first to remove the salt, THEN use this tool. Do not charge the phone until it is 100% dry.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Can I use this for sand, dirt, or mud?</summary>
-                <p><strong>NO.</strong> This tool uses acoustic pressure to eject fluids and loose dust. If you dropped your phone in wet mud, concrete, or heavy sand, playing high-frequency sounds can force the solid particles deeper or tear the speaker membrane. Clean out solid debris manually before using this tool.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Can I use this on AirPods, Headphones, or Laptops?</summary>
-                <p>Yes. For AirPods/Earbuds: Hold them with the mesh facing down and run the 'High Pitch' (Apple 165Hz) mode. For Laptops: Place the laptop open on its side (speaker facing down) and run 'Pro Mode'.</p>
-            </details>
-            <details class="faq-item">
-                <summary>Will using this tool void my warranty?</summary>
-                <p>No. This tool plays standard audio files at standard frequencies. It is no different than playing music at max volume, which your phone is designed to handle. It does not modify software or root your device.</p>
-            </details>
-            <details class="faq-item">
-                <summary>My top speaker is quiet but the bottom is fine?</summary>
-                <p>The top earpiece has a smaller mesh that traps water easily. Use our 'Mode 5 (Air 440Hz)' specifically for the top speaker, as higher frequencies penetrate smaller holes better than deep bass.</p>
-            </details>
-            <details class="faq-item">
-                <summary>I hear a 'crackling' noise. Is my speaker broken?</summary>
-                <p>Not necessarily. Crackling usually means water is vibrating against the membrane. Keep running the sound until the crackling stops. If it persists after 24 hours of drying, you may have permanent hardware damage unrelated to water.</p>
-            </details>
+            <details class="faq-item"><summary>Is this sound safe for my speakers?</summary><p>Yes. We use specific sine waves (165Hz) designed to vibrate the speaker diaphragm without exceeding safe amplitude limits. It essentially 'shakes' the water off without damaging hardware.</p></details>
+            <details class="faq-item"><summary>How long should I run the cleaning cycle?</summary><p>We recommend running "Pro Mode" (Auto Cycle) 2-3 times. If water is still trapped, position your phone upright and run it for 5 minutes.</p></details>
+            <details class="faq-item"><summary>Does this work for iPhone and Android?</summary><p>Absolutely. It works on any device with a speaker, including iPhone, Samsung Galaxy, Pixel, Xiaomi, and even smartwatches.</p></details>
+            <details class="faq-item"><summary>What should I do if the sound is still muffled?</summary><p>Wait 10 minutes for evaporation, then try again. Gravity helps—keep the speaker facing down while the sound plays.</p></details>
+            <details class="faq-item"><summary>Why can't I hear anything?</summary><p>Your volume might be too low, or water has temporarily shorted the connection. Turn volume to max and run the 165Hz mode.</p></details>
+            <details class="faq-item"><summary>My phone fell in Salt Water (Ocean). What now?</summary><p style="color: #ffaa00;"><strong>CRITICAL:</strong> Salt creates corrosion instantly. Rinse your phone gently with fresh tap water first to remove the salt, THEN use this tool. Do not charge the phone until it is 100% dry.</p></details>
+            <details class="faq-item"><summary>Can I use this for sand, dirt, or mud?</summary><p><strong>NO.</strong> This tool uses acoustic pressure to eject fluids and loose dust. If you dropped your phone in wet mud, concrete, or heavy sand, playing high-frequency sounds can force the solid particles deeper or tear the speaker membrane. Clean out solid debris manually before using this tool.</p></details>
+            <details class="faq-item"><summary>Can I use this on AirPods, Headphones, or Laptops?</summary><p>Yes. For AirPods/Earbuds: Hold them with the mesh facing down and run the 'High Pitch' (Apple 165Hz) mode. For Laptops: Place the laptop open on its side (speaker facing down) and run 'Pro Mode'.</p></details>
+            <details class="faq-item"><summary>Will using this tool void my warranty?</summary><p>No. This tool plays standard audio files at standard frequencies. It is no different than playing music at max volume, which your phone is designed to handle. It does not modify software or root your device.</p></details>
+            <details class="faq-item"><summary>My top speaker is quiet but the bottom is fine?</summary><p>The top earpiece has a smaller mesh that traps water easily. Use our 'Mode 5 (Air 440Hz)' specifically for the top speaker, as higher frequencies penetrate smaller holes better than deep bass.</p></details>
+            <details class="faq-item"><summary>I hear a 'crackling' noise. Is my speaker broken?</summary><p>Not necessarily. Crackling usually means water is vibrating against the membrane. Keep running the sound until the crackling stops. If it persists after 24 hours of drying, you may have permanent hardware damage unrelated to water.</p></details>
         </div>
     </div>
 
@@ -996,22 +739,10 @@
         <img src="transmission-uplink-sharing.jpg" alt="Graphic showing wireless transmission and sharing of the Phone Speaker Cleaner tool between mobile devices" class="article-img" style="margin-top: 0; margin-bottom: 15px;">
         
         <div class="social-share-grid">
-            <a href="#" onclick="openSocial(event, 'fb')" class="social-btn fb">
-                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.312h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>
-                Facebook
-            </a>
-            <a href="#" onclick="openSocial(event, 'tw')" class="social-btn tw">
-                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.054 10.054 0 01-3.127 1.184 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>
-                Twitter
-            </a>
-            <a href="#" onclick="openSocial(event, 'rd')" class="social-btn rd">
-                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M24 11.779c0-1.459-1.192-2.645-2.657-2.645-.715 0-1.363.286-1.84.746-1.81-1.191-4.259-1.949-6.971-2.046l1.483-4.669 4.016.941-.006.058c0 1.193.975 2.163 2.174 2.163 1.198 0 2.172-.97 2.172-2.163s-.975-2.164-2.172-2.164c-.92 0-1.704.574-2.021 1.379l-4.329-1.015c-.189-.046-.381.063-.44.249l-1.654 5.207c-2.838.034-5.409.798-7.3 2.025-.474-.438-1.103-.712-1.799-.712-1.465 0-2.656 1.187-2.656 2.646 0 .97.533 1.811 1.317 2.271-.052.282-.086.567-.086.857 0 3.911 4.808 7.093 10.719 7.093s10.72-3.182 10.72-7.093c0-.274-.029-.544-.075-.81.832-.447 1.405-1.312 1.405-2.318zm-17.224 1.816c0-.868.71-1.575 1.582-1.575.872 0 1.581.707 1.581 1.575s-.709 1.574-1.581 1.574-1.582-.706-1.582-1.574zm9.061 4.669c-1.797 1.715-5.486 1.684-5.547 1.684-.06 0-3.774.063-5.569-1.657-.224-.216-.236-.57-.025-.806.21-.237.558-.255.782-.038 1.479 1.408 4.382 1.341 4.811 1.341.406 0 3.308.035 4.774-1.368.216-.208.568-.184.78.046.213.232.193.585-.006.8zm-.253-3.095c-.872 0-1.581-.706-1.581-1.574 0-.868.709-1.575 1.581-1.575s1.581.707 1.581 1.575c0 .868-.709 1.574-1.581 1.574z"/></svg>
-                Reddit
-            </a>
-            <a href="#" onclick="openSocial(event, 'wa')" class="social-btn wa">
-                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 .001 5.387.001 12.035c0 2.128.552 4.2 1.6 6.03L0 24l6.104-1.603c1.782.973 3.805 1.488 5.927 1.488 6.643 0 12.028-5.387 12.028-12.035C24 5.387 18.674 0 12.031 0zm3.847 17.202c-.595 1.674-2.887 2.215-3.992 2.306-.99.082-2.316-.178-4.908-1.258-3.13-1.306-5.178-4.52-5.335-4.728-.157-.208-1.272-1.696-1.272-3.235 0-1.539.805-2.296 1.09-2.61.285-.314.622-.392.83-.392.208 0 .416.002.598.01.193.008.45-.075.704.536.265.632.882 2.155.961 2.323.078.168.13.364.026.574-.104.21-.156.34-.312.55-.156.21-.325.46-.456.586-.143.14-.294.292-.132.571.162.278.72 1.196 1.584 1.98 1.114 1.01 2.016 1.32 2.294 1.46.278.14.441.116.608-.06.166-.176.716-.832.909-1.118.193-.286.386-.238.646-.142.26.096 1.645.776 1.927.915.282.14.471.21.538.326.068.117.068.675-.527 2.349z"/></svg>
-                WhatsApp
-            </a>
+            <a href="#" onclick="openSocial(event, 'fb')" class="social-btn fb"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M22.675 0h-21.35c-.732 0-1.325.593-1.325 1.325v21.351c0 .731.593 1.324 1.325 1.324h11.495v-9.294h-3.128v-3.622h3.128v-2.671c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.312h3.587l-.467 3.622h-3.12v9.293h6.116c.73 0 1.323-.593 1.323-1.325v-21.35c0-.732-.593-1.325-1.325-1.325z"/></svg>Facebook</a>
+            <a href="#" onclick="openSocial(event, 'tw')" class="social-btn tw"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723 10.054 10.054 0 01-3.127 1.184 4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/></svg>Twitter</a>
+            <a href="#" onclick="openSocial(event, 'rd')" class="social-btn rd"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M24 11.779c0-1.459-1.192-2.645-2.657-2.645-.715 0-1.363.286-1.84.746-1.81-1.191-4.259-1.949-6.971-2.046l1.483-4.669 4.016.941-.006.058c0 1.193.975 2.163 2.174 2.163 1.198 0 2.172-.97 2.172-2.163s-.975-2.164-2.172-2.164c-.92 0-1.704.574-2.021 1.379l-4.329-1.015c-.189-.046-.381.063-.44.249l-1.654 5.207c-2.838.034-5.409.798-7.3 2.025-.474-.438-1.103-.712-1.799-.712-1.465 0-2.656 1.187-2.656 2.646 0 .97.533 1.811 1.317 2.271-.052.282-.086.567-.086.857 0 3.911 4.808 7.093 10.719 7.093s10.72-3.182 10.72-7.093c0-.274-.029-.544-.075-.81.832-.447 1.405-1.312 1.405-2.318zm-17.224 1.816c0-.868.71-1.575 1.582-1.575.872 0 1.581.707 1.581 1.575s-.709 1.574-1.581 1.574-1.582-.706-1.582-1.574zm9.061 4.669c-1.797 1.715-5.486 1.684-5.547 1.684-.06 0-3.774.063-5.569-1.657-.224-.216-.236-.57-.025-.806.21-.237.558-.255.782-.038 1.479 1.408 4.382 1.341 4.811 1.341.406 0 3.308.035 4.774-1.368.216-.208.568-.184.78.046.213.232.193.585-.006.8zm-.253-3.095c-.872 0-1.581-.706-1.581-1.574 0-.868.709-1.575 1.581-1.575s1.581.707 1.581 1.575c0 .868-.709 1.574-1.581 1.574z"/></svg>Reddit</a>
+            <a href="#" onclick="openSocial(event, 'wa')" class="social-btn wa"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12.031 0C5.385 0 .001 5.387.001 12.035c0 2.128.552 4.2 1.6 6.03L0 24l6.104-1.603c1.782.973 3.805 1.488 5.927 1.488 6.643 0 12.028-5.387 12.028-12.035C24 5.387 18.674 0 12.031 0zm3.847 17.202c-.595 1.674-2.887 2.215-3.992 2.306-.99.082-2.316-.178-4.908-1.258-3.13-1.306-5.178-4.52-5.335-4.728-.157-.208-1.272-1.696-1.272-3.235 0-1.539.805-2.296 1.09-2.61.285-.314.622-.392.83-.392.208 0 .416.002.598.01.193.008.45-.075.704.536.265.632.882 2.155.961 2.323.078.168.13.364.026.574-.104.21-.156.34-.312.55-.156.21-.325.46-.456.586-.143.14-.294.292-.132.571.162.278.72 1.196 1.584 1.98 1.114 1.01 2.016 1.32 2.294 1.46.278.14.441.116.608-.06.166-.176.716-.832.909-1.118.193-.286.386-.238.646-.142.26.096 1.645.776 1.927.915.282.14.471.21.538.326.068.117.068.675-.527 2.349z"/></svg>WhatsApp</a>
         </div>
         
         <button class="btn-share-copy" onclick="copySocialMessage()" id="btn-share-copy" aria-label="Copy for Instagram">
@@ -1048,28 +779,20 @@
     </div>
 
     <div class="authority-hub">
-
         <div class="hub-panel">
             <div class="hub-header">
                 <div class="hub-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 3v18m5-18v18m-10-18v18M2 12h20"/></svg></div>
-                <div class="hub-title">
-                    <span>Core Science</span>
-                    <h2>The Physics of Acoustic Ejection</h2>
-                </div>
+                <div class="hub-title"><span>Core Science</span><h2>The Physics of Acoustic Ejection</h2></div>
             </div>
             <div class="hub-content">
                 <p>Understanding how the <strong>Phone Speaker Cleaner</strong> operates requires an analysis of fluid dynamics and resonant frequencies. When a mobile device is submerged, water enters the speaker's acoustic chamber. Due to <strong>surface tension</strong> and the microscopic nature of the speaker grill ports, this water becomes "locked" in place. Standard audio cannot displace this mass because the vibration lacks the necessary kinetic force.</p>
-                
                 <img src="acoustic-resonance-physics-diagram.jpg" alt="Scientific diagram illustrating acoustic resonance and cymatic displacement breaking water surface tension inside a phone speaker" class="article-img">
-                
                 <h3>Frequency Resonance Theory</h3>
                 <p>Every mechanical diaphragm has a resonant frequency. Our primary <strong>165Hz Sine Wave</strong> is engineered to match the mechanical resonance of modern micro-speakers found in flagship smartphones. By vibrating the diaphragm at its resonant peak, we create a high-pressure air cushion behind the water. This pressure overcomes the surface tension, physically forcing droplets through the mesh holes at high velocity.</p>
-                
                 <div class="tech-spec-grid">
                     <div class="spec-item"><label>AMPLITUDE</label><span class="spec-val">MAX OUTPUT</span></div>
                     <div class="spec-item"><label>WAVEFORM</label><span class="spec-val">SINE / SAW</span></div>
                 </div>
-
                 <p>Moreover, we utilize <strong>Cymatic displacement</strong>. This is the study of visible sound and vibration. By alternating between 165Hz and 200Hz, we create "sonic nodes" that push moisture from the center of the speaker cone toward the edges, where it can be safely expelled without draining back into the internal motherboard components.</p>
             </div>
         </div>
@@ -1077,23 +800,14 @@
         <div class="hub-panel">
             <div class="hub-header">
                 <div class="hub-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M17 1H7c-1.1 0-2 .9-2 2v18c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V3c0-1.1-.9-2-2-2zm0 18H7V5h10v14z"/></svg></div>
-                <div class="hub-title">
-                    <span>Hardware Guide</span>
-                    <h2>Smartphone Recovery Protocols</h2>
-                </div>
+                <div class="hub-title"><span>Hardware Guide</span><h2>Smartphone Recovery Protocols</h2></div>
             </div>
             <div class="hub-content">
                 <p>Not all speakers are created equal. High-end devices like the <strong>Samsung S24 Ultra</strong> or <strong>iPhone 16 Pro</strong> use specialized waterproof membranes. However, once water is trapped <em>outside</em> that membrane but <em>inside</em> the grill, audio quality drops by up to 80%.</p>
-                
                 <img src="supported-devices-speaker-cleaner.jpg" alt="Apple iPhone, Samsung Galaxy, and AirPods showing compatibility with Phone Speaker Cleaner" class="article-img">
-                
                 <h3>iPhone "Water Eject" Optimization</h3>
                 <p>Apple’s acoustic design relies on a vertical chamber. For best results, we recommend using the <strong>Apple 165Hz Mode</strong> while holding the phone vertically. Gravity acts as a secondary force, assisting the sonic waves in pulling the water down through the bottom ports. Avoid using high-heat hair dryers, as this can melt the IP68-rated adhesive seals.</p>
-
-                <div class="visual-divider">
-                    <div class="wave-anim"></div>
-                </div>
-
+                <div class="visual-divider"><div class="wave-anim"></div></div>
                 <h3>Android and Stereo Speaker Arrays</h3>
                 <p>Many Android devices utilize a "dual-fire" system where the top earpiece acts as a second speaker. Our <strong>Isolation Diagnostics</strong> allow you to test the Left and Right channels independently. If your top speaker sounds tinny after rain exposure, run the <strong>Treble 12kHz</strong> diagnostic. This ultra-high frequency creates rapid, micro-vibrations capable of clearing fine mist from the smaller earpiece mesh.</p>
             </div>
@@ -1102,28 +816,20 @@
         <div class="hub-panel">
             <div class="hub-header">
                 <div class="hub-icon"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M12 2L4.5 20.29l.71.71L12 18l6.79 3 .71-.71z"/></svg></div>
-                <div class="hub-title">
-                    <span>Prevention</span>
-                    <h2>Combatting Permanent Audio Decay</h2>
-                </div>
+                <div class="hub-title"><span>Prevention</span><h2>Combatting Permanent Audio Decay</h2></div>
             </div>
             <div class="hub-content">
                 <p>While water is a sudden threat, <strong>Dust and Micro-particles</strong> are the "silent killers" of mobile audio. Over time, pocket lint, skin oils, and atmospheric dust accumulate in the speaker grill. This creates a solid "crust" that muffles sound and can eventually cause the speaker coil to overheat and fail.</p>
-                
                 <img src="speaker-dust-crust-prevention.jpg" alt="Microscopic comparison of a clean speaker mesh versus one clogged with dust crust being shattered by a 60Hz square wave" class="article-img">
-                
                 <h3>The Sonic Shake Methodology</h3>
                 <p>Our <strong>Dust-Shake 60Hz</strong> mode uses a low-frequency square wave. Unlike sine waves, square waves have a "harder" impact on the speaker diaphragm, acting like a tiny hammer. This physical jarring breaks apart the dust crust, allowing the 1kHz "Final" mode to blow the particles out of the device. We recommend a "Deep Clean" cycle once every 14 days to maintain 100% audio fidelity.</p>
-
                 <div class="tech-spec-grid">
                     <div class="spec-item"><label>DUST FREQ</label><span class="spec-val">60HZ - 1KHZ</span></div>
                     <div class="spec-item"><label>CLEAN RATE</label><span class="spec-val">98.2% EST.</span></div>
                 </div>
-
                 <p>Finally, we must address <strong>Hardware Safety</strong>. Using needles or toothpicks to clean speakers often results in a punctured membrane, which destroys the device's water resistance and ruins sound quality forever. The <strong>Phone Speaker Cleaner</strong> is a non-invasive, purely acoustic solution that maintains the physical integrity of your hardware while providing professional-grade cleaning results.</p>
             </div>
         </div>
-
     </div>
 
     <div class="panel">
@@ -1160,6 +866,8 @@
         <a href="privacy.html" onclick="openCookieSettings(event)">Privacy & Cookie Settings</a>
         <span class="don-sig">© 2026 DON SYSTEMS</span>
     </footer>
+
+    <button id="master-toggle" class="btn-toggle-master" onclick="stop()" aria-label="Stop Cleaning">STOP</button>
 </div> 
 
 <script>
@@ -1354,7 +1062,7 @@
     const translations = {
         en: {
             trust: "TRUSTED BY 10M+ DEVICES", tagline: "Advanced High-Frequency Water Ejector",
-            ptest: "Speaker Test", piso: "Isolation", pops: "Advanced Ops", pdeep: "Deep Clean",
+            ptest: "Speaker Test", piso: "Isolation", pops: "Emergency Auto-Fix", pdeep: "1-Click",
             left: "LEFT", right: "RIGHT", bass: "BASS", treble: "TREBLE",
             pro: "PRO MODE", turbo: "TURBO MODE", auto: "AUTO CYCLE", boost: "BOOST",
             pdust: "Dust Integrity", pmeter: "Meter", contam: "Contamination Level", check: "CHECK LEVEL",
@@ -1373,7 +1081,7 @@
         },
         ar: {
             trust: "موثوق به في 10 ملايين جهاز", tagline: "أداة إخراج المياه عالية التردد المتقدمة",
-            ptest: "اختبار السماعة", piso: "عزل", pops: "عمليات متقدمة", pdeep: "تنظيف عميق",
+            ptest: "اختبار السماعة", piso: "عزل", pops: "إصلاح الطوارئ", pdeep: "نقرة واحدة",
             left: "يسار", right: "يمين", bass: "بيس", treble: "تريبل",
             pro: "وضع المحترفين", turbo: "وضع التيربو", auto: "دورة تلقائية", boost: "تعزيز",
             pdust: "سلامة الغبار", pmeter: "مقياس", contam: "مستوى التلوث", check: "فحص المستوى",
@@ -1392,7 +1100,7 @@
         },
         ru: {
             trust: "ДОВЕРЯЮТ 10М+ УСТРОЙСТВ", tagline: "Продвинутый Инструмент для удаления воды",
-            ptest: "Тест Динамика", piso: "Изоляция", pops: "Спец. Опции", pdeep: "Глубокая Чистка",
+            ptest: "Тест Динамика", piso: "Изоляция", pops: "АВТО-ИСПРАВЛЕНИЕ", pdeep: "1 КЛИК",
             left: "ЛЕВЫЙ", right: "ПРАВЫЙ", bass: "БАС", treble: "ВЧ",
             pro: "PRO РЕЖИМ", turbo: "ТУРБО", auto: "АВТО ЦИКЛ", boost: "БУСТ",
             pdust: "Уровень Пыли", pmeter: "Метр", contam: "Уровень Загрязнения", check: "ПРОВЕРИТЬ",
@@ -1411,7 +1119,7 @@
         },
         es: {
             trust: "USADO EN 10M+ DISPOSITIVOS", tagline: "El eyector de agua avanzado de alta frecuencia",
-            ptest: "Prueba de Altavoz", piso: "Aislamiento", pops: "Ops Avanzadas", pdeep: "Limpieza Profunda",
+            ptest: "Prueba de Altavoz", piso: "Aislamiento", pops: "Arreglo Emergencia", pdeep: "1 Clic",
             left: "IZQ", right: "DER", bass: "BAJOS", treble: "AGUDOS",
             pro: "MODO PRO", turbo: "MODO TURBO", auto: "CICLO AUTO", boost: "BOOST",
             pdust: "Integridad Polvo", pmeter: "Medidor", contam: "Nivel Contaminación", check: "VERIFICAR",
@@ -1430,7 +1138,7 @@
         },
         fr: {
             trust: "APPROUVÉ PAR 10M+ D'APPAREILS", tagline: "L'éjecteur d'eau avancé haute fréquence",
-            ptest: "Test Haut-parleur", piso: "Isolation", pops: "Ops Avancées", pdeep: "Nettoyage Profond",
+            ptest: "Test Haut-parleur", piso: "Isolation", pops: "Réparation Urgence", pdeep: "1 Clic",
             left: "GAUCHE", right: "DROITE", bass: "BASSES", treble: "AIGUS",
             pro: "MODE PRO", turbo: "MODE TURBO", auto: "CYCLE AUTO", boost: "BOOST",
             pdust: "Intégrité Poussière", pmeter: "Compteur", contam: "Niveau Contamination", check: "VÉRIFIER",
@@ -1449,7 +1157,7 @@
         },
         cn: {
             trust: "超过1000万设备信赖", tagline: "高级高频排水工具",
-            ptest: "扬声器测试", piso: "隔离", pops: "高级操作", pdeep: "深度清洁",
+            ptest: "扬声器测试", piso: "隔离", pops: "紧急修复", pdeep: "一键",
             left: "左声道", right: "右声道", bass: "低音", treble: "高音",
             pro: "专业模式", turbo: "极速模式", auto: "自动循环", boost: "增强",
             pdust: "灰尘检测", pmeter: "仪表", contam: "污染程度", check: "检查水平",
