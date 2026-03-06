@@ -298,11 +298,22 @@
         }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(-5px); } to { opacity: 1; transform: translateY(0); } }
 
+        /* --- QUICK START GUIDE (UX UPGRADE) --- */
+        .quick-start-row {
+            display: flex; gap: 8px; margin-top: 15px; margin-bottom: 5px; width: 100%; justify-content: space-between;
+        }
+        .quick-step {
+            flex: 1; background: #050505; border: 1px solid #222; border-radius: 6px; padding: 10px 5px;
+            text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center;
+        }
+        .quick-step-num { color: var(--accent); font-weight: 900; font-size: 14px; margin-bottom: 2px; font-family: monospace;}
+        .quick-step-text { font-size: 9px; color: #aaa; text-transform: uppercase; font-weight: 700; letter-spacing: 0.5px; }
+
         /* --- CONTROL PANEL --- */
         .panel {
             background: rgba(10, 10, 10, 0.85); border: 1px solid var(--border);
             border-radius: 12px; padding: 20px; backdrop-filter: blur(10px);
-            margin-bottom: 5px; /* Tighter margins for the funnel */
+            margin-bottom: 5px; 
         }
         .panel-title { 
             font-size: 11px; color: #fff; text-transform: uppercase; letter-spacing: 1px;
@@ -335,7 +346,7 @@
             background: #000; border: 1px solid #222; padding: 8px; height: 45px;
             overflow-y: hidden; margin-bottom: 15px; border-radius: 4px; opacity: 0.8; line-height: 1.4;
         }
-        .ops-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 20px; }
+        .ops-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-bottom: 15px; }
         .btn-ops {
             height: 50px; border: 1px solid var(--accent); background: rgba(255, 0, 60, 0.05);
             color: #fff; font-weight: 800; text-transform: uppercase; letter-spacing: 1px;
@@ -347,7 +358,7 @@
         .ops-label { position: absolute; top: 2px; right: 4px; font-size: 7px; background: #fff; color: #000; padding: 1px 3px; border-radius: 2px; font-weight: 900; }
         .btn-ops.active .ops-label { background: #000; color: #fff; }
 
-        .progress-container { width: 100%; height: 6px; background: #222; border-radius: 3px; overflow: hidden; opacity: 0.5; transition: opacity 0.3s; }
+        .progress-container { width: 100%; height: 6px; background: #222; border-radius: 3px; overflow: hidden; opacity: 0.5; transition: opacity 0.3s; margin-bottom: 10px;}
         .progress-container.active { opacity: 1; }
         .progress-fill { height: 100%; width: 0%; background: var(--accent); box-shadow: 0 0 10px var(--accent); transition: width 0.1s linear; }
 
@@ -571,15 +582,36 @@
         <div class="trust-badge-container">
             <svg class="trust-icon" aria-hidden="true" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
             <span class="trust-text">VERIFIED</span>
-            <span class="trust-sub">Trusted by Over 1M+ Devices</span>
+            <span class="trust-sub">Trusted by 10M+ Devices</span>
         </div>
 
         <div class="tagline" id="lbl-tagline">Advanced High-Frequency Water Ejector</div>
+        
+        <div style="text-align: center; font-size: 9px; color: #666; margin-top: 5px; margin-bottom: 5px; text-transform: uppercase; letter-spacing: 1px;">
+            <span style="color: var(--neon-green); font-weight: 900;">✓</span> Safe for iPhone, Galaxy, Pixel & AirPods
+        </div>
+
         <div class="typing-status" id="type-text">System Online.</div>
         
         <div id="smart-device-bar">
             <span id="device-name">SCANNING HARDWARE...</span>
         </div>
+
+        <div class="quick-start-row">
+            <div class="quick-step">
+                <div class="quick-step-num">1</div>
+                <div class="quick-step-text">Max Volume</div>
+            </div>
+            <div class="quick-step">
+                <div class="quick-step-num">2</div>
+                <div class="quick-step-text">Face Down</div>
+            </div>
+            <div class="quick-step" style="border-color: var(--accent); background: rgba(255,0,60,0.05);">
+                <div class="quick-step-num">3</div>
+                <div class="quick-step-text" style="color: #fff;">Press Auto</div>
+            </div>
+        </div>
+
     </header>
 
     <div class="panel" style="border-color: var(--accent); box-shadow: 0 0 20px rgba(255,0,60,0.1);">
@@ -592,8 +624,6 @@
             <h3>⚠️ Critical Hardware Warning</h3>
             <p>Do <strong>NOT</strong> use this tool if your speaker is clogged with mud, wet concrete, or heavy sand. Acoustic vibration against solid, rock-like matter can physically tear the delicate speaker membrane.</p>
         </div>
-
-        <div style="text-align: center; margin-bottom: 20px; font-size: 11px; font-weight: 700; color: #fff; text-transform: uppercase; letter-spacing: 1px;">Turn your phone volume to max.</div>
         
         <div class="panel-title"><span id="lbl-panel-ops">Emergency Auto-Fix</span> <span id="lbl-panel-deep">1-Click</span></div>
         <div id="system-log">> WAITING FOR COMMAND...</div>
@@ -608,8 +638,12 @@
                 <span class="boost-icon"></span> <span id="lbl-boost">BOOST</span>
             </button>
         </div>
+
+        <div style="text-align: center; font-size: 8px; color: #888; text-transform: uppercase; margin-top: 5px;">
+            <span style="color: var(--accent);">●</span> Acoustic Resonance Technology &nbsp; <span style="color: var(--accent);">●</span> 100% Hardware Safe
+        </div>
         
-        <div class="progress-container" id="prog-cont">
+        <div class="progress-container" id="prog-cont" style="margin-top: 15px;">
             <div class="progress-fill" id="prog-fill"></div>
         </div>
     </div>
